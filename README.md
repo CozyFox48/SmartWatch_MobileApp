@@ -1,107 +1,185 @@
-![React Native Elements App](https://user-images.githubusercontent.com/5962998/37248832-a7060286-24b1-11e8-94a8-847ab6ded4ec.png)
+# [Soft UI React Native](https://demos.creative-tim.com/soft-ui-react-native/index.html) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/home?status=soft-ui%20React%20Native,%20a%20cool%20NowUI%20React%20Native%20App%20Template%20%E2%9D%A4%EF%B8%8F%20https%3A//bit.ly/2KAj86H%20%23reactnative%20%23NowUI%20%23designsystem%20%23developers%20via%20%40CreativeTim)
 
-# React Native Elements App
 
-**[Mobile App](https://expo.io/@monte9/react-native-elements-app)**
+ ![version](https://img.shields.io/badge/version-1.1.0-blue.svg)  [![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/ct-soft-ui-react-native.svg?style=flat)](https://github.com/creativetimofficial/ct-soft-ui-react-native/issues?q=is%3Aopen+is%3Aissue) [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/ct-soft-ui-react-native.svg?maxAge=2592000)](https://github.com/creativetimofficial/ct-soft-ui-react-native/issues?q=is%3Aissue+is%3Aclosed)
 
-This is the Demo app for [React Native Elements](https://github.com/react-native-elements/react-native-elements) built with [Expo](https://expo.io/). The purpose of this app is to demonstrate the usage of the various UI components that React Native Elements provides out of the box.
 
-This app also works on the `web` platform using [React Native Web](https://github.com/necolas/react-native-web). You can check out the [live website here](https://react-native-elements.github.io/react-native-elements-app). If you are looking to build a React Native mobile app which can reuse the code to deploy it on the web, this is the right place to begin. We decided to use [Expo](https://expo.io/), which reduces the effort required to build an app once and deploy it anywhere.
+![Product](https://s3.amazonaws.com/creativetim_bucket/products/490/original/opt_soft_ui_react_native_thumbnail.jpg)
 
-## Getting Started
+Soft UI React Native is a fully coded app template built over [React Native](https://facebook.github.io/react-native/?ref=creativetim) and [Expo](https://expo.io/?ref=creativetim) to allow you to create powerful and beautiful e-commerce mobile applications. We have redesigned all the usual components in-house to make it look like Soft UI's KIT, minimalistic and easy to use.
 
-### Run it locally
+Start your development with a Design System for React Native inspired by Soft UI KIT. If you like Soft UI's KIT, you will love this react native app template! It features a huge number of components and screens built to fit together and look amazing.
 
-1. Install [Expo CLI](https://docs.expo.io/versions/latest/workflow/expo-cli/)
+### FULLY CODED COMPONENTS
 
-```
-[sudo] npm install -g expo-cli
-```
+Soft UI React Native features over 100 variations of components like buttons, inputs, cards, navigations etc, giving you the freedom of choosing and combining. All components can take variations in colour, that you can easily modify inside our theme file.
 
-_If permissions errors then please use `--unsafe-perm=true` flag too [npm/npm#16766](https://github.com/npm/npm/issues/16766)_
+You will save a lot of time going from prototyping to full-functional code, because all elements are implemented. We wanted the design process to be seamless, so switching from image to the real page is very easy to do.
 
-2. Clone the project
+### Components & Cards
+Soft UI React Native comes packed with a large number of components and cards. Putting together a mobile app has never been easier than matching together different components. From the profile screen to a settings screen, you can easily customise and build your screens. We have created multiple options for you to put together and customise into pixel perfect screens.
 
-```
-git clone https://github.com/react-native-elements/react-native-elements-app.git
-```
+View [all components here](https://demos.creative-tim.com/soft-ui-react-native/).
 
-3. Install dependencies
+### Example Screens
+If you want to get inspiration or just show something directly to your clients, you can jump start your development with our pre-built example screens. From onboarding screens to profile or discover screens, you will be able to quickly set up the basic structure for your React Native mobile project.
 
-```
-cd react-native-elements-app
+View [all screens here](https://demos.creative-tim.com/soft-ui-react-native/#screens).
 
-# Using yarn
-yarn install
 
-# Using npm
-npm install
-```
+Let us know your thoughts below. And good luck with development!
 
-4. Run the cross-platform app (uses [Expo](https://expo.io/learn))
 
-```
-# Using yarn
-yarn start
+## Table of Contents
 
-# Using npm
-npm start
-```
+* [Versions](#versions)
+* [Demo](#demo)
+* [Quick Start](#quick-start)
+* [Documentation](#documentation)
+* [File Structure](#file-structure)
+* [OS Support](#os-support)
+* [Resources](#resources)
+* [Reporting Issues](#reporting-issues)
+* [Technical Support or Questions](#technical-support-or-questions)
+* [Licensing](#licensing)
+* [Useful Links](#useful-links)
 
-### Deploy Web App
+## Versions
 
-First you must set correct `publicPath` in `app.web-build.json`. Next you must build the web app using:
+[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/html-logo.jpg?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/soft-ui-kit-pro)[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/react-native-logo.jpg?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/soft-ui-react-native)
 
-```
-yarn build:web
-```
+| HTML | React-Native  |
+| --- | --- |
+| [![Soft UI Kit](https://s3.amazonaws.com/creativetim_bucket/products/448/original/opt_sds_free_thumbnail.jpg?1614876201)](https://www.creative-tim.com/product/soft-ui-design-system)  | [![Soft UI React-Native](https://s3.amazonaws.com/creativetim_bucket/products/490/original/opt_soft_ui_react_native_thumbnail.jpg?1625576346)](https://www.creative-tim.com/product/soft-ui-react-native) |
 
-Once you have built it, you can see generated `web-build` folder.
+## Demo
+- [Start page](https://demos.creative-tim.com/soft-ui-react-native)
+- [Quick start](https://www.creative-tim.com/learning-lab/react-native/quick-start/soft)
 
-This folder can be hosted as static website. For example, you can publish on [Github Pages](https://pages.github.com/) via [gh-pages](https://github.com/tschaub/gh-pages) cli.
+[View more](https://demos.creative-tim.com/soft-ui-react-native)
 
-```
-yarn deploy
-```
+## Quick start
+- Try it out on Expo (Simulator for iOS or even your physical device if you have an Android)
+- Download from [Creative Tim](https://www.creative-tim.com/product/soft-ui-react-native)
 
-**Note:** Don't forget to add or change "homepage" key in your package.json!
 
-### Ejecting
+## Documentation
+The documentation for the Soft UI React Native is hosted at our [website](https://www.creative-tim.com/learning-lab/react-native/overview/soft).
 
-The mobile app is built using Expo. If you would like to eject, you can run the following command:
 
-```
-# Using Yarn
-yarn eject
-
-# Using npm
-npm run eject
-```
-
-We highly recommend you read the [official Expo ejection docs](https://docs.expo.io/versions/latest/expokit/eject/) before proceeding, as the action of ejecting is not reversible.
-
-## Major contributors:
-
-- [@oxyii](https://github.com/oxyii) 💪🏼
-- [@xavier-villelegier](https://github.com/xavier-villelegier) 🔥
-- [@martinezguillaume](https://github.com/martinezguillaume) 🎸
-- [@iRoachie](https://github.com/iRoachie) 💯
-- [@monte9](https://github.com/monte9) 🤓
-
-## React Native Elements
-
-This app is built using [React Native Elements](https://github.com/react-native-elements/react-native-elements). React Native Elements is a UI toolkit for React Native that provides you with production ready UI components so that you can focus on building the part that makes your app unique as opposed to reinvent the UI wheel. Aiding rapid development and pragmatic design, React Native Elements is the one-stop shop for all your requirements, making your web and mobile apps look more dynamic and professional.
-
-You can install `react-native-elements` in your app using:
+## File Structure
+Within the download you'll find the following directories and files:
 
 ```
-# Using yarn
-yarn add react-native-elements
-
-# Using npm
-npm install react-native-elements --save
+soft-ui-react-native/
+├── App.tsx
+├── README.md
+├── app.json
+├── assets
+├── babel.config.js
+├── package.json
+├── src
+│   ├── assets
+│   │   ├── fonts
+│   │   ├── icons
+│   │   └── images
+│   ├── components
+│   │   ├── Article.tsx
+│   │   ├── Block.tsx
+│   │   ├── Button.tsx
+│   │   ├── Checkbox.tsx
+│   │   ├── Image.tsx
+│   │   ├── Input.tsx
+│   │   ├── Modal.tsx
+│   │   ├── Product.tsx
+│   │   ├── Switch.tsx
+│   │   ├── Text.tsx
+│   │   └── index.tsx
+│   ├── constants
+│   │   ├── index.ts
+│   │   ├── light.ts
+│   │   ├── mocks.ts
+│   │   ├── regex.ts
+│   │   ├── theme.ts
+│   │   ├── translations
+│   │   │   ├── en.json
+│   │   │   └── index.ts
+│   │   └── types
+│   │       ├── components.ts
+│   │       ├── index.ts
+│   │       └── theme.ts
+│   ├── hooks
+│   │   ├── index.ts
+│   │   ├── useData.tsx
+│   │   ├── useScreenOptions.tsx
+│   │   ├── useTheme.tsx
+│   │   └── useTranslation.tsx
+│   ├── navigation
+│   │   ├── App.tsx
+│   │   ├── Menu.tsx
+│   │   └── Screens.tsx
+│   └── screens
+│       ├── Articles.tsx
+│       ├── Components.tsx
+│       ├── Home.tsx
+│       ├── Pro.tsx
+│       ├── Profile.tsx
+│       ├── Register.tsx
+│       └── index.ts
+└── tsconfig.json
 ```
 
-## Feedback
 
-In case you run into any problems while running this app or have additional questions, please create a new issue on this repo, and we will follow up with you.
+## OS Support
+
+At present, we officially aim to support the last two versions of the following operating systems:
+
+[<img src="https://raw.githubusercontent.com/creativetimofficial/ct-material-kit-pro-react-native/master/assets/android-logo.png" width="60" height="60" />](https://www.creative-tim.com/product/soft-ui-react-native)[<img src="https://raw.githubusercontent.com/creativetimofficial/ct-material-kit-pro-react-native/master/assets/apple-logo.png" width="60" height="60" />](https://www.creative-tim.com/product/soft-ui-react-native)
+
+## Resources
+- Demo: <https://demos.creative-tim.com/soft-ui-react-native>
+- Download Page: <https://www.creative-tim.com/product/soft-ui-react-native>
+- Documentation: <https://www.creative-tim.com/learning-lab/react-native/overview/soft>
+- License Agreement: <https://www.creative-tim.com/license>
+- Support: <https://www.creative-tim.com/contact-us>
+- Issues: [Github Issues Page](https://github.com/creativetimofficial/ct-soft-ui-react-native/issues)
+- [Soft UI Design System](https://www.creative-tim.com/product/soft-ui-design-system?ref=soft-uiprn-readme) - For Front End Development
+
+## Reporting Issues
+
+We use GitHub Issues as the official bug tracker for the Soft UI React Native. Here are some advices for our users that want to report an issue:
+
+1. Make sure that you are using the latest version of the Soft UI React Native.
+2. Providing us reproducible steps for the issue will shorten the time it takes for it to be fixed.
+3. Some issues may be browser specific, so specifying in what browser you encountered the issue might help.
+
+
+### Technical Support or Questions
+
+If you have questions or need help integrating the product please [contact us](https://www.creative-tim.com/contact-us) instead of opening an issue.
+
+
+## Licensing
+
+- Copyright 2021 Creative Tim (https://www.creative-tim.com/)
+- Creative Tim [license](https://www.creative-tim.com/license)
+
+## Useful Links
+
+- [Tutorials](https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w)
+- [Affiliate Program](https://www.creative-tim.com/affiliates/new) (earn money)
+- [Blog Creative Tim](http://blog.creative-tim.com/)
+- [Free Products](https://www.creative-tim.com/bootstrap-themes/free) from Creative Tim
+- [Premium Products](https://www.creative-tim.com/bootstrap-themes/premium) from Creative Tim
+- [React Products](https://www.creative-tim.com/bootstrap-themes/react-themes) from Creative Tim
+- [Angular Products](https://www.creative-tim.com/bootstrap-themes/angular-themes) from Creative Tim
+- [VueJS Products](https://www.creative-tim.com/bootstrap-themes/vuejs-themes) from Creative Tim
+- [More products](https://www.creative-tim.com/bootstrap-themes) from Creative Tim
+- Check our Bundles [here](https://www.creative-tim.com/bundles?ref=soft-ui-github-readme)
+
+
+### Social Media
+Twitter: <https://twitter.com/CreativeTim>
+Facebook: <https://www.facebook.com/CreativeTim>
+Dribbble: <https://dribbble.com/creativetim>
+Instagram: <https://www.instagram.com/CreativeTimOfficial>
