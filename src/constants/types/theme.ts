@@ -218,6 +218,9 @@ export interface ThemeWeights {
 }
 export interface ThemeIcons {
   watch_gray: ImageSourcePropType;
+  flag_uk: ImageSourcePropType;
+  flag_france: ImageSourcePropType;
+  flag_spain: ImageSourcePropType;
   qrcode: ImageSourcePropType;
   direction_right: ImageSourcePropType;
   arrow_right: ImageSourcePropType;

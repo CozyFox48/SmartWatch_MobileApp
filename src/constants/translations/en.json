@@ -135,6 +135,27 @@
     "unit_oxygen": "%",
     "unit_heart": "bpm"
   },
+  "setting":{
+    "account":"Account",
+    "name":"Name",
+    "save":"Save",
+    "change":"Change",
+    "my_devices":"My Devices",
+    "color_app":"Color App",
+    "temperature_type":"Temperature Type",
+    "alarm_setting":"Alarm Settings",
+    "red":"Red",
+    "blue":"Blue",
+    "yellow":"Yellow",
+    "celcius":"Celcius (°C)",
+    "fahrenheit":"Fahrenheit (°F)",
+    "hours":"hours",
+    "language":"Language",
+    "color":"Color",
+    "english":"English",
+    "spanish":"Español",
+    "french":"Français"
+  },
   "pro": {
     "title": "Soft UI PRO",
     "alert": "This feature is available in PRO version",

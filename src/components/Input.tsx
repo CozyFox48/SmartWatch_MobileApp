@@ -97,9 +97,9 @@ const Input = ({
   const inputContainerStyles = StyleSheet.flatten([
     {
       minHeight: sizes.inputHeight,
+      borderRadius: sizes.inputRadius,
       borderWidth: isFocused ? 2 : sizes.inputBorder,
       borderColor: isFocused ? colors.focus : inputColor,
-      borderRadius: sizes.inputRadius,
     },
   ]) as ViewStyle;
 
@@ -108,7 +108,6 @@ const Input = ({
       flex: 1,
       zIndex: 2,
       height: '100%',
-      // backgroundColor: colors.gray,
       fontSize: sizes.p,
       color: colors.input,
       paddingHorizontal: sizes.inputPadding,
@@ -122,11 +121,19 @@ const Input = ({
   return (
     <Block flex={0} style={inputBoxStyles}>
       {label && (
-        <Text bold marginBottom={sizes.s}>
-          {label}
-        </Text>
+        <Block flex={0}>
+          <Text bold marginBottom={sizes.s}>
+            {label}
+          </Text>
+        </Block>
       )}
-      <Block row align="center" justify="flex-end" style={inputContainerStyles}>
+      <Block
+        row
+        flex={0}
+        align="center"
+        justify="flex-end"
+        style={inputContainerStyles}
+        white>
         {search && assets.search && (
           <Image
             source={assets.search}

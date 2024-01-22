@@ -15,6 +15,7 @@ import {
   DeviceDetail,
   AlertHistory,
   Setting,
+  History,
 } from '../screens';
 import {useScreenOptions, useTranslation} from '../hooks';
 
@@ -26,11 +27,16 @@ export default () => {
 
   return (
     <Stack.Navigator screenOptions={screenOptions.stack}>
-      {/* <Stack.Screen
+      <Stack.Screen
+        name="History"
+        component={History}
+        options={{title: t('navigation.home')}}
+      />
+      <Stack.Screen
         name="Setting"
         component={Setting}
         options={{title: t('navigation.home')}}
-      /> */}
+      />
       <Stack.Screen
         name="Home"
         component={Home}

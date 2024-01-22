@@ -84,7 +84,8 @@ const DrawerContent = (
 
   // screen list for Drawer menu
   const screens = [
-    // {name: 'Setting', to: 'Setting', icon: assets.register},
+    {name: 'History', to: 'History', icon: assets.register},
+    {name: 'Setting', to: 'Setting', icon: assets.register},
     {name: t('screens.home'), to: 'Home', icon: assets.home},
     {name: 'AlertHistory', to: 'AlertHistory', icon: assets.register},
     {name: 'origin', to: 'Home1', icon: assets.home},

@@ -66,7 +66,7 @@ const Image = ({
       ...(color && {tintColor: color}),
       ...(transform && {transform}),
       ...(shadow && {
-        shadowColor: colors.shadow,
+        shadowColor: colors.primary,
         shadowOffset: {
           width: sizes.shadowOffsetWidth,
           height: sizes.shadowOffsetHeight,

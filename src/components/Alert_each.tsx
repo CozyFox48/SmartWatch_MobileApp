@@ -61,7 +61,7 @@ const Article = ({data}) => {
       card
       radius={sizes.xxl}
       color={color_light}
-      shadow
+      
       row
       marginBottom={sizes.sm}>
       <Block

@@ -127,9 +127,9 @@ export const SIZES: ThemeSizes = {
   socialIconSize: 26,
 
   // button shadow
-  shadowOffsetWidth: 0,
+  shadowOffsetWidth: 7,
   shadowOffsetHeight: 7,
-  shadowOpacity: 0.07,
+  shadowOpacity: 0.7,
   shadowRadius: 4,
   elevation: 2,
 

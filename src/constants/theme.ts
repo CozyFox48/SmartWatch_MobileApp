@@ -32,6 +32,9 @@ export const WEIGHTS: ThemeWeights = {
 };
 
 export const ICONS: ThemeIcons = {
+  flag_france: require('../assets/icons/flag_france.png'),
+  flag_uk: require('../assets/icons/flag_uk.png'),
+  flag_spain: require('../assets/icons/flag_spain.png'),
   apple: require('../assets/icons/apple.png'),
   qrcode: require('../assets/icons/qrcode.png'),
   direction_right: require('../assets/icons/direction_right.png'),
