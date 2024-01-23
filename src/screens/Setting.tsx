@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import {useTheme, useTranslation} from '../hooks';
-import {Block, Text, Input, Button, Image} from '../components';
+import {Block, Text, Input, Button, Image, LinkBox} from '../components';
 import Collapsible from 'react-native-collapsible';
 import FIcon from 'react-native-vector-icons/FontAwesome';
 import F6Icon from 'react-native-vector-icons/FontAwesome5';
@@ -87,7 +87,7 @@ const Home = () => {
       <Block row>
         {countries.map((each, key) => {
           return (
-            <Block padding={sizes.s}>
+            <Block padding={sizes.s} key={key}>
               <Button shadow>
                 <Image
                   source={each.svgFile}
@@ -123,7 +123,9 @@ const Home = () => {
             padding={sizes.s}
             color={each.id === 'red' ? colors.danger_light : ''}
             row>
-            <Text flex={1} color={each.color}>{each.name}</Text>
+            <Text flex={1} color={each.color}>
+              {each.name}
+            </Text>
             {each.id === 'red' ? (
               <FIcon name={'check'} color={colors.primary} size={20} flex={0} />
             ) : (
@@ -226,17 +228,22 @@ const Home = () => {
   ];
 
   return (
-    <Block white scroll>
-      {data.map((each, key) => {
-        return (
-          <Collapse_Each
-            key={key}
-            collapse={collapse}
-            setCollapse={setCollapse}
-            data={each}
-          />
-        );
-      })}
+    <Block white>
+      <Block white scroll>
+        {data.map((each, key) => {
+          return (
+            <Collapse_Each
+              key={key}
+              collapse={collapse}
+              setCollapse={setCollapse}
+              data={each}
+            />
+          );
+        })}
+      </Block>
+      <Block flex={0} marginBottom={sizes.sm}>
+        <LinkBox />
+      </Block>
     </Block>
   );
 };

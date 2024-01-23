@@ -3,14 +3,14 @@ import React from 'react';
 import Block from './Block';
 import Button from './Button';
 import Text from './Text';
-
+import {useNavigation} from '@react-navigation/core';
 import {useTheme, useTranslation} from '../hooks';
 import FIcon from 'react-native-vector-icons/Feather';
 
 const Article = () => {
   const {t} = useTranslation();
   const {colors, gradients, icons, sizes} = useTheme();
-
+  const navigation = useNavigation();
   const linkData = [
     {
       name: t('screens.home'),
@@ -19,7 +19,7 @@ const Article = () => {
     },
     {
       name: t('screens.alert'),
-      link: 'Alert',
+      link: 'AlertHistory',
       icon: 'bell',
     },
     {
@@ -36,7 +36,12 @@ const Article = () => {
 
   const LinkButton = ({data}) => {
     return (
-      <Button>
+      <Button
+        onPress={() =>
+          navigation.navigate('Screens', {
+            screen: data.link,
+          })
+        }>
         <FIcon name={data.icon} color={colors.text} size={30} />
         <Text bold>{data.name}</Text>
       </Button>
@@ -51,8 +56,7 @@ const Article = () => {
       row
       justify="space-evenly"
       radius={sizes.xxl}
-      marginHorizontal={sizes.sm}
-      >
+      marginHorizontal={sizes.sm}>
       {linkData.map((each) => (
         <LinkButton data={each} key={each.link} />
       ))}

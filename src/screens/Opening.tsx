@@ -1,6 +1,6 @@
-import React, {useCallback, useEffect} from 'react';
-import {Linking, StatusBar, Dimensions} from 'react-native';
-
+import React from 'react';
+import {Dimensions} from 'react-native';
+import {useNavigation} from '@react-navigation/core';
 import {useTheme, useTranslation} from '../hooks/';
 import {Block, Button, Image, Text, Footer} from '../components/';
 
@@ -8,16 +8,8 @@ const screenWidth = Dimensions.get('window').width;
 
 const Pro = () => {
   const {t} = useTranslation();
-  const {assets, colors, gradients, sizes} = useTheme();
-
-  useEffect(() => {
-    StatusBar.setBarStyle('light-content');
-    return () => {
-      StatusBar.setBarStyle('dark-content');
-    };
-  }, []);
-
-  const handleWebLink = useCallback((url) => Linking.openURL(url), []);
+  const {assets, sizes} = useTheme();
+  const navigation = useNavigation();
 
   return (
     <Image
@@ -47,9 +39,9 @@ const Pro = () => {
           paddingVertical={sizes.sm}
           paddingHorizontal={sizes.m}
           onPress={() =>
-            handleWebLink(
-              'https://www.creative-tim.com/product/soft-ui-pro-react-native',
-            )
+            navigation.navigate('Screens', {
+              screen: 'SignUp',
+            })
           }>
           <Text white bold h5 marginRight={sizes.xs}>
             {t('menu.started')}

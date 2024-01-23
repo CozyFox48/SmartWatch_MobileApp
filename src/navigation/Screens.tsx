@@ -2,14 +2,7 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import {
-  Articles,
-  Components,
-  Home1,
   Home,
-  Profile,
-  Register,
-  // Pro,
-  Splash,
   Opening,
   SignUp,
   DeviceDetail,
@@ -28,14 +21,19 @@ export default () => {
   return (
     <Stack.Navigator screenOptions={screenOptions.stack}>
       <Stack.Screen
+        name="Opening"
+        component={Opening}
+        options={screenOptions.opening}
+      />
+      <Stack.Screen
         name="History"
         component={History}
-        options={{title: t('navigation.home')}}
+        options={{title: t('navigation.history')}}
       />
       <Stack.Screen
         name="Setting"
         component={Setting}
-        options={{title: t('navigation.home')}}
+        options={{title: t('navigation.setting')}}
       />
       <Stack.Screen
         name="Home"
@@ -45,59 +43,17 @@ export default () => {
       <Stack.Screen
         name="AlertHistory"
         component={AlertHistory}
-        options={{title: t('common.signup')}}
+        options={{title: t('navigation.alert')}}
       />
       <Stack.Screen
         name="SignUp"
         component={SignUp}
-        options={{title: t('common.signup')}}
+        options={screenOptions.back}
       />
       <Stack.Screen
         name="DeviceDetail"
         component={DeviceDetail}
-        options={{title: t('common.signup')}}
-      />
-      <Stack.Screen
-        name="Opening"
-        component={Opening}
-        options={screenOptions.pro}
-      />
-
-      <Stack.Screen
-        name="Splash"
-        component={Splash}
-        options={screenOptions.pro}
-      />
-      <Stack.Screen
-        name="Home1"
-        component={Home1}
-        options={{title: t('navigation.home')}}
-      />
-
-      <Stack.Screen
-        name="Components"
-        component={Components}
-        options={screenOptions.components}
-      />
-
-      <Stack.Screen
-        name="Articles"
-        component={Articles}
-        options={{title: t('navigation.articles')}}
-      />
-
-      {/* <Stack.Screen name="Pro" component={Pro} options={screenOptions.pro} /> */}
-
-      <Stack.Screen
-        name="Profile"
-        component={Profile}
-        options={{headerShown: false}}
-      />
-
-      <Stack.Screen
-        name="Register"
-        component={Register}
-        options={{headerShown: false}}
+        options={screenOptions.back}
       />
     </Stack.Navigator>
   );

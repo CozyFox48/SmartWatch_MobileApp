@@ -1,30 +1,18 @@
-import React, {useCallback, useState} from 'react';
+import React from 'react';
 
-import {useData, useTheme, useTranslation} from '../hooks';
+import {useTheme, useTranslation} from '../hooks';
 import {Block, Button, Image, Input, DevicesList, Text} from '../components';
-
+import {useNavigation} from '@react-navigation/core';
 const Home = () => {
   const {t} = useTranslation();
-  const [tab, setTab] = useState<number>(0);
-  const {following, trending} = useData();
-  const [products, setProducts] = useState(following);
-  const {assets, colors, fonts, gradients, sizes} = useTheme();
-
+  const {assets, sizes} = useTheme();
+  const navigation = useNavigation();
   return (
     <Block white>
       <Block flex={1}>
-        <Block flex={0} padding={sizes.sm} justify="center" align="flex-start">
-          <Button
-            row
-            gray
-            paddingVertical={sizes.s}
-            paddingHorizontal={sizes.sm}>
-            <Image source={assets.arrow_left} />
-          </Button>
-        </Block>
         <Block flex={0}>
           <Text bold h3 align="center">
-            {t('screens.register')}
+            {t('screens.signup')}
           </Text>
         </Block>
         {/* search input */}
@@ -38,15 +26,18 @@ const Home = () => {
           row
           primary
           paddingVertical={sizes.sm}
-          paddingHorizontal={sizes.m}>
+          paddingHorizontal={sizes.m}
+          onPress={() =>
+            navigation.navigate('Screens', {
+              screen: 'Home',
+            })
+          }>
           <Text white bold h5 marginRight={sizes.xs}>
             {t('menu.started')}
           </Text>
           <Image source={assets.arrow_right} />
         </Button>
       </Block>
-
-      {/* toggle products list */}
     </Block>
   );
 };

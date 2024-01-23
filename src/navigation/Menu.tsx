@@ -88,18 +88,9 @@ const DrawerContent = (
     {name: 'Setting', to: 'Setting', icon: assets.register},
     {name: t('screens.home'), to: 'Home', icon: assets.home},
     {name: 'AlertHistory', to: 'AlertHistory', icon: assets.register},
-    {name: 'origin', to: 'Home1', icon: assets.home},
-    {name: t('screens.components'), to: 'Components', icon: assets.components},
-    {name: t('screens.articles'), to: 'Articles', icon: assets.document},
-    // {name: t('screens.rental'), to: 'Pro', icon: assets.rental},
-    {name: t('screens.profile'), to: 'Profile', icon: assets.profile},
-    {name: t('screens.splash'), to: 'Splash', icon: assets.settings},
     {name: t('screens.opening'), to: 'Opening', icon: assets.settings},
-    {name: t('screens.register'), to: 'Register', icon: assets.register},
     {name: t('common.signup'), to: 'SignUp', icon: assets.register},
     {name: 'DeviceDetail', to: 'DeviceDetail', icon: assets.register},
-
-    // {name: t('screens.extra'), to: 'Pro', icon: assets.extras},
   ];
 
   return (
