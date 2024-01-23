@@ -4,7 +4,6 @@ import Block from './Block';
 import Text from './Text';
 import {useTheme, useTranslation} from '../hooks';
 import FIcon from 'react-native-vector-icons/FontAwesome5';
-
 import AIcon from 'react-native-vector-icons/FontAwesome';
 import Oxygen from './../assets/icons/oxygen.js';
 

@@ -1,136 +1,170 @@
-import React from 'react';
-
+import React, {useState} from 'react';
 import {useTheme, useTranslation} from '../hooks';
-import {Block, LinkBox, Text, Tab_View} from '../components';
-import FIcon from 'react-native-vector-icons/Feather';
-import FoIcon from 'react-native-vector-icons/FontAwesome5';
-
+import {Block, LinkBox, Text, Tab_View, Button} from '../components';
+import FIcon from 'react-native-vector-icons/FontAwesome5';
 import AIcon from 'react-native-vector-icons/FontAwesome';
-import Oxygen from '../assets/icons/oxygen.js';
-import Beat1 from '../assets/icons/beat1.js';
-import Beat2 from '../assets/icons/beat2.js';
+import Oxygen from './../assets/icons/oxygen.js';
+import {Dimensions} from 'react-native';
+import {LineChart} from 'react-native-chart-kit';
+
+const screenWidth = Dimensions.get('window').width;
 const SceneEach = ({item}) => {
   const {colors, fonts, sizes} = useTheme();
   const {t} = useTranslation();
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const categoryData = [
+    {
+      id: 'temperature',
+      title: t('alert.temperature'),
+      color: colors.danger,
+      color_light: colors.danger_light,
+      icon: <FIcon name={'temperature-high'} color={colors.danger} size={25} />,
+    },
+    {
+      id: 'oxygen',
+      title: t('alert.oxygen'),
+      color: colors.info,
+      color_light: colors.info_light,
+      icon: <Oxygen width={25} height={25} color={colors.info} />,
+    },
+    {
+      id: 'heart_rate',
+      title: t('alert.heart_rate'),
+      color: colors.warning,
+      color_light: colors.warning_light,
+      icon: <AIcon name={'heartbeat'} color={colors.warning} size={25} />,
+    },
+  ];
+  const data = {
+    labels: [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+    ],
+    datasets: [
+      {
+        data: [20, 50, 30, 40, 30, 10, 60, 40, 30, 40, 10, 40],
+        color: () => colors.primary,
+        strokeWidth: 2,
+      },
+    ],
+  };
+
+  const chartConfig = {
+    backgroundGradientFrom: colors.white,
+    backgroundGradientTo: colors.white,
+    decimalPlaces: 2,
+    color: () => colors.primary,
+    labelColor: () => colors.text,
+    propsForDots: {
+      r: '6',
+      strokeWidth: '2',
+      stroke: colors.darkGray,
+    },
+  };
   return (
     <Block white>
-      <Block color={colors.warning_light} radius={sizes.m} margin={sizes.sm}>
-        <Block row flex={0} margin={sizes.s}>
-          <Block flex={1} row align="center">
-            <Block
-              color={colors.warning_middle}
-              justify="center"
-              align="center"
-              radius={sizes.xxl}
-              width={sizes.xl}
-              height={sizes.xl}
-              flex={0}>
-              <AIcon name={'heartbeat'} color={colors.warning} size={30} />
-            </Block>
-            <Text color={colors.warning} h5>
-              {t('alert.heart_rate')}
-            </Text>
-          </Block>
-          <Block flex={0} row align="flex-end">
-            <Text font={fonts.normal} h2 color={colors.warning}>
-              {item.heart_rate}
-            </Text>
-            <Text
-              font={fonts.normal}
-              h5
-              color={colors.warning}
-              marginBottom={sizes.s}
-              marginLeft={sizes.s}>
-              {t('alert.unit_heart')}
-            </Text>
+      <Block marginTop={sizes.s}>
+        <Block flex={0}>
+          <Block row flex={0} scrollHorizontal>
+            {categoryData.map((each, index) => (
+              <Block
+                flex={0}
+                key={index}
+                padding={sizes.sm}
+                margin={sizes.s}
+                row
+                radius={sizes.m}
+                color={each.color_light}
+                center
+                align="center">
+                {each.icon}
+                <Text color={each.color} h5 paddingLeft={sizes.s}>
+                  {each.title}
+                </Text>
+              </Block>
+            ))}
           </Block>
         </Block>
-        <Block center>
-          <Beat1 width={'100%'} height={50} color={colors.warning} />
-          <Beat2 width={'100%'} height={40} color={colors.warning} />
-        </Block>
-      </Block>
-      <Block row marginHorizontal={sizes.sm}>
-        <Block
-          color={colors.danger_light}
-          radius={sizes.m}
-          padding={sizes.sm}
-          marginRight={sizes.s}>
+        <Block flex={0} row align="center" padding={sizes.s} marginBottom={sizes.s}>
+          <Text p bold flex={1}>
+            Temperature History
+          </Text>
           <Block
-            color={colors.danger_middle}
-            justify="center"
-            align="center"
-            radius={sizes.xxl}
-            width={sizes.xl}
-            height={sizes.xl}
-            flex={0}>
-            <FoIcon name={'temperature-high'} color={colors.danger} size={30} />
+            flex={0}
+            color={colors.danger_light}
+            marginHorizontal={sizes.xs}
+            padding={sizes.xs}
+            radius={sizes.s}>
+            <Text p primary>
+              Week
+            </Text>
           </Block>
-          <Text color={colors.primary} p>
-            {t('alert.temperature')}
-          </Text>
-          <Text font={fonts.normal} h2 color={colors.primary}>
-            {item.temperature}
-            {t('alert.unit_temp')}
-          </Text>
-        </Block>
-        <Block
-          color={colors.info_light}
-          radius={sizes.m}
-          padding={sizes.sm}
-          marginLeft={sizes.s}>
           <Block
-            color={colors.info_middle}
-            justify="center"
-            align="center"
-            radius={sizes.xxl}
-            width={sizes.xl}
-            height={sizes.xl}
-            flex={0}>
-            <Oxygen width={30} height={30} color={colors.info} />
+            flex={0}
+            color={colors.danger_light}
+            marginHorizontal={sizes.xs}
+            padding={sizes.xs}
+            radius={sizes.s}>
+            <Text p primary>
+              Week
+            </Text>
           </Block>
-          <Text color={colors.info} p>
-            {t('alert.oxygen')}
-          </Text>
-          <Text font={fonts.normal} h2 color={colors.info}>
-            {item.oxygen}
-            {t('alert.unit_oxygen')}
-          </Text>
+          <Block
+            flex={0}
+            color={colors.danger_light}
+            marginHorizontal={sizes.xs}
+            padding={sizes.xs}
+            radius={sizes.s}>
+            <Text p primary>
+              Week
+            </Text>
+          </Block>
         </Block>
-      </Block>
-      <Block
-        flex={0}
-        radius={sizes.xxl}
-        gray
-        padding={sizes.s}
-        row
-        marginHorizontal={sizes.sm}
-        marginVertical={sizes.sm}>
-        <Block
-          secondary
-          justify="center"
-          align="center"
-          radius={sizes.xxl}
-          padding={sizes.sm}
-          flex={0}>
-          <FIcon name={'phone-call'} color={colors.text} size={27} />
-        </Block>
-        <Block flex={1} marginLeft={sizes.sm} center>
-          <Text h5 semibold>
-            {t('home.emergency')}
-          </Text>
-        </Block>
-        <Block
-          primary
-          justify="center"
-          align="center"
-          radius={sizes.xxl}
-          paddingHorizontal={sizes.m}
-          flex={0}>
-          <Text bold h5 white marginLeft={sizes.xs}>
-            {t('home.call')}
-          </Text>
-        </Block>
+        <LineChart
+          data={data}
+          width={screenWidth}
+          height={300}
+          bezier
+          formatYLabel={(number) => `${Number(number).toFixed(1)}`}
+          withInnerLines={false}
+          withOuterLines={false}
+          chartConfig={chartConfig}
+          onDataPointClick={(point) => {
+            setActiveIndex(point.index);
+          }}
+          getDotColor={(dataPoint, dataPointIndex) => {
+            return dataPointIndex === activeIndex
+              ? colors.primary
+              : colors.white;
+          }}
+          renderDotContent={({x, y, index, indexData}) => {
+            return index === activeIndex ? (
+              <Block
+                style={{position: 'absolute', top: y - 30, left: x - 30}}
+                white
+                card
+                padding={sizes.xs}
+                key={index}>
+                <Text primary p bold>
+                  {indexData}
+                </Text>
+              </Block>
+            ) : (
+              <></>
+            );
+          }}
+        />
       </Block>
     </Block>
   );
