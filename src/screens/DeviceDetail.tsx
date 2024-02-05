@@ -1,29 +1,25 @@
 import React from 'react';
 
-import { useTheme, useTranslation} from '../hooks';
-import {Block, Button, Image, Input, Text} from '../components';
+import { useTheme, useTranslation, useData } from '../hooks';
+import { Block, Button, Input, Text } from '../components';
 
 const Home = () => {
-  const {t} = useTranslation();
-  const {assets, colors, sizes} = useTheme();
+  const { t } = useTranslation();
+  const { colors, sizes } = useTheme();
+  const { handleDevices, devices, detailDevice } = useData();
 
   return (
     <Block white>
       <Block flex={1}>
-        <Block flex={0} padding={sizes.sm} justify="center" align="flex-start">
-          <Button
-            row
-            gray
-            paddingVertical={sizes.s}
-            paddingHorizontal={sizes.sm}>
-            <Image source={assets.arrow_left} />
-          </Button>
-        </Block>
-
         <Block flex={0} padding={sizes.padding}>
           <Input
-            label={t('device.device') + ' ' + t('common.name')}
+            label={t('device.device_name')}
             placeholder={t('common.search')}
+            value={devices[detailDevice].name}
+            onChangeText={(text) => {
+              // let temp=devices
+              // devices[detailDevice].name=text;
+            }}
           />
         </Block>
         <Block
@@ -31,23 +27,22 @@ const Home = () => {
           paddingTop={sizes.sm}
           paddingBottom={sizes.s}
           paddingHorizontal={sizes.padding}>
-          <Text bold>{t('device.device') + ' ' + t('common.info')}</Text>
+          <Text bold>{t('device.device_detail')}</Text>
         </Block>
-
         <Block
           flex={0}
           gray
           radius={sizes.s}
           marginHorizontal={sizes.m}
-          style={{borderColor: colors.darkGray, borderWidth: 2}}
+          style={{ borderColor: colors.darkGray, borderWidth: 2 }}
           paddingHorizontal={sizes.padding}
           paddingVertical={sizes.sm}>
           <Block flex={0} row marginVertical={sizes.xs}>
             <Text p flex={1}>
-              {t('device.id')}
+              {t('device.device_id')}
             </Text>
             <Text p bold flex={0}>
-              #9878
+              #{devices[detailDevice].uuid}
             </Text>
           </Block>
           <Block flex={0} row marginVertical={sizes.xs}>
@@ -55,15 +50,15 @@ const Home = () => {
               {t('device.signalStrength')}
             </Text>
             <Text p bold flex={0}>
-              78
+              {devices[detailDevice].strength}
             </Text>
           </Block>
           <Block flex={0} row marginVertical={sizes.xs}>
             <Text p flex={1}>
               {t('device.connectionStatu')}
             </Text>
-            <Text p bold primary flex={0}>
-              Connected
+            <Text p bold primary={devices[detailDevice].connection} flex={0}>
+              {devices[detailDevice].connection ? 'Connected' : 'Disconnected'}
             </Text>
           </Block>
         </Block>

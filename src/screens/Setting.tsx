@@ -1,14 +1,15 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-import {useTheme, useTranslation} from '../hooks';
-import {Block, Text, Input, Button, Image, LinkBox} from '../components';
+import { useTheme, useTranslation, useData } from '../hooks';
+import { Block, Text, Input, Button, Image, LinkBox, No_Device, DevicesList } from '../components';
 import Collapsible from 'react-native-collapsible';
 import FIcon from 'react-native-vector-icons/FontAwesome';
 import F6Icon from 'react-native-vector-icons/FontAwesome5';
 import MIcon from 'react-native-vector-icons/MaterialIcons';
+import IIcon from 'react-native-vector-icons/Ionicons';
 
-const Collapse_Each = ({collapse, setCollapse, data}) => {
-  const {sizes, colors, fonts} = useTheme();
+const Collapse_Each = ({ collapse, setCollapse, data }) => {
+  const { sizes, colors, fonts } = useTheme();
   return (
     <Block gray margin={sizes.s} radius={sizes.m}>
       <Button
@@ -44,9 +45,10 @@ const Collapse_Each = ({collapse, setCollapse, data}) => {
 };
 
 const Home = () => {
-  const {colors, sizes, assets, fonts} = useTheme();
-  const {t} = useTranslation();
-  const [collapse, setCollapse] = useState('alarm');
+  const { colors, sizes, assets, fonts } = useTheme();
+  const { t } = useTranslation();
+  const { settingTab } = useData();
+  const [collapse, setCollapse] = useState(settingTab);
 
   const SetName = () => {
     return (
@@ -111,9 +113,9 @@ const Home = () => {
 
   const ColorComponent = () => {
     const colorsData = [
-      {id: 'red', name: t('setting.red'), color: colors.danger},
-      {id: 'blue', name: t('setting.blue'), color: colors.info},
-      {id: 'yellow', name: t('setting.yellow'), color: colors.warning},
+      { id: 'red', name: t('setting.red'), color: colors.danger },
+      { id: 'blue', name: t('setting.blue'), color: colors.info },
+      { id: 'yellow', name: t('setting.yellow'), color: colors.warning },
     ];
     return (
       <Block padding={sizes.s}>
@@ -139,8 +141,8 @@ const Home = () => {
 
   const TemperatureComponent = () => {
     const colorsData = [
-      {id: 'celcius', name: t('setting.celcius'), color: colors.danger},
-      {id: 'fahrenheit', name: t('setting.fahrenheit'), color: colors.info},
+      { id: 'celcius', name: t('setting.celcius'), color: colors.danger },
+      { id: 'fahrenheit', name: t('setting.fahrenheit'), color: colors.info },
     ];
     return (
       <Block padding={sizes.s}>
@@ -196,6 +198,13 @@ const Home = () => {
       content: <SetName />,
     },
     {
+      id: 'devices',
+      icon: <IIcon name={'watch'} color={colors.primary} size={20} />,
+      title: t('setting.devices'),
+      header: '',
+      content: <DevicesList />
+    },
+    {
       id: 'language',
       icon: <MIcon name={'language'} color={colors.primary} size={20} />,
       title: t('setting.language'),
@@ -224,7 +233,7 @@ const Home = () => {
       title: t('setting.alarm_setting'),
       header: '3 Hours',
       content: <AlarmComponent />,
-    },
+    }
   ];
 
   return (

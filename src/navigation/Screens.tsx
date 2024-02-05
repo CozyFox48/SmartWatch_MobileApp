@@ -9,6 +9,7 @@ import {
   AlertHistory,
   Setting,
   History,
+  SignIn,
 } from '../screens';
 import {useScreenOptions, useTranslation} from '../hooks';
 
@@ -26,6 +27,11 @@ export default () => {
         options={screenOptions.opening}
       />
       <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{title: t('navigation.home')}}
+      />
+      <Stack.Screen
         name="History"
         component={History}
         options={{title: t('navigation.history')}}
@@ -36,11 +42,6 @@ export default () => {
         options={{title: t('navigation.setting')}}
       />
       <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{title: t('navigation.home')}}
-      />
-      <Stack.Screen
         name="AlertHistory"
         component={AlertHistory}
         options={{title: t('navigation.alert')}}
@@ -48,6 +49,11 @@ export default () => {
       <Stack.Screen
         name="SignUp"
         component={SignUp}
+        options={screenOptions.back}
+      />
+      <Stack.Screen
+        name="SignIn"
+        component={SignIn}
         options={screenOptions.back}
       />
       <Stack.Screen

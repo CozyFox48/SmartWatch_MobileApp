@@ -3,15 +3,35 @@
     "welcome_to": "Welcome to",
     "ads": "Monitor your baby’s health status in real time."
   },
+  "signup":{
+    "password_mismatch":"The passwords don't match.",
+    "strong_password":"This password is too weak. ",
+    "password_des":"It should include at least one lowercase letter, one uppercase letter, one digit, and should be at least 6 characters long.",
+    "email_pattern":"Email is not correct format.",
+    "have_account":"Have account already.",
+    "signup_success":"Successfuly registered.",
+    "signup_fail":"Error occured in registeration."
+  },
+  "signin":{
+    "need_account":"I need a new account.",
+    "signin_success":"Successfuly sign in.",
+    "signin_fail":"Error occured in login."
+  },
   "common": {
     "name": "Name",
-    "search": "Search"
+    "email":"Email",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "input_here": "Input here...",
+    "search": "Search",
+    "remove":"Remove"
   },
   "device": {
-    "id": "ID",
     "connectionStatu": "Connection Status",
     "signalStrength": "Signal Strength",
-    "device": "Device"
+    "device_id": "Device ID",
+    "device_name":"Device Name",
+    "device_detail":"Device Detail"
   },
   "app": {
     "company_name": "Brilliant Baby Tech",
@@ -22,6 +42,7 @@
     "home": "Home",
     "alert": "Alert",
     "signup": "Sign Up",
+    "signin":"Sign In",
     "setting": "Setting",
     "history": "History",
     "opening": "Opening",
@@ -31,9 +52,9 @@
   },
   "navigation": {
     "home": "Health Status ❤",
-    "alert":"Alert History",
-    "history":"Health History",
-    "setting":"Settings"
+    "alert": "Alert History",
+    "history": "Health History",
+    "setting": "Settings"
   },
   "menu": {
     "started": "Get Started",
@@ -42,7 +63,9 @@
   "home": {
     "emergency": "Need an emergency?",
     "call": "Call",
-    "trending": "Trending"
+    "trending": "Trending",
+    "no_device1":"There is no connected device.",
+    "no_device2":"Scan for devices?"
   },
   "alert": {
     "temperature": "Temperature",
@@ -59,6 +82,7 @@
     "name": "Name",
     "save": "Save",
     "change": "Change",
+    "devices":"Devices",
     "my_devices": "My Devices",
     "color_app": "Color App",
     "temperature_type": "Temperature Type",

@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import {useTheme, useTranslation} from '../hooks';
-import {Block, LinkBox, Text, Tab_View} from '../components';
+import { useTheme, useTranslation, useDatabase } from '../hooks';
+import { Block, LinkBox, Text, Tab_View } from '../components';
 import FIcon from 'react-native-vector-icons/Feather';
 import FoIcon from 'react-native-vector-icons/FontAwesome5';
-
 import AIcon from 'react-native-vector-icons/FontAwesome';
 import Oxygen from './../assets/icons/oxygen.js';
 import Beat1 from '../assets/icons/beat1.js';
 import Beat2 from '../assets/icons/beat2.js';
-const SceneEach = ({item}) => {
-  const {colors, fonts, sizes} = useTheme();
-  const {t} = useTranslation();
+
+const SceneEach = ({ item }) => {
+  const { colors, fonts, sizes } = useTheme();
+  const { t } = useTranslation();
+
   return (
     <Block white>
       <Block color={colors.warning_light} radius={sizes.m} margin={sizes.sm}>
@@ -33,7 +34,7 @@ const SceneEach = ({item}) => {
           </Block>
           <Block flex={0} row align="flex-end">
             <Text font={fonts.normal} h2 color={colors.warning}>
-              {item.heart_rate}
+              56
             </Text>
             <Text
               font={fonts.normal}
@@ -70,7 +71,7 @@ const SceneEach = ({item}) => {
             {t('alert.temperature')}
           </Text>
           <Text font={fonts.normal} h2 color={colors.primary}>
-            {item.temperature}
+            56
             {t('alert.unit_temp')}
           </Text>
         </Block>
@@ -93,7 +94,7 @@ const SceneEach = ({item}) => {
             {t('alert.oxygen')}
           </Text>
           <Text font={fonts.normal} h2 color={colors.info}>
-            {item.oxygen}
+            56
             {t('alert.unit_oxygen')}
           </Text>
         </Block>
@@ -137,36 +138,27 @@ const SceneEach = ({item}) => {
 };
 
 const Home = () => {
-  const {sizes} = useTheme();
+  const { sizes } = useTheme();
+  const [routes, setRoutes] = useState([]);
+  const [scenes, setScenes] = useState({});
+  
+  useEffect(() => {
+    const getData = async () => {
+      const devices = await useDatabase.get_devices();
+      const tempRoutes = devices.map((each) => {
+        return { id: each.uuid, title: each.name };
+      })
+      setRoutes(tempRoutes);
+      const tempScenes = {};
+      devices.forEach((item) => {
+        const nameKey = item.uuid;
+        tempScenes[nameKey] = <SceneEach item={item} />;
+      });
+      setScenes(tempScenes);
+    }
+    getData();
+  }, [])
 
-  const data = [
-    {
-      name: 'Tom',
-      temperature: 37.4,
-      oxygen: 89,
-      heart_rate: 75,
-    },
-    {
-      name: 'Jerry',
-      temperature: 36.6,
-      oxygen: 92,
-      heart_rate: 80,
-    },
-    {
-      name: 'Bruce',
-      temperature: 36.3,
-      oxygen: 94,
-      heart_rate: 75,
-    },
-  ];
-  const routes = data.map((each) => {
-    return {id: each.name, title: each.name};
-  });
-  const scenes = {};
-  data.forEach((item) => {
-    const nameKey = item.name;
-    scenes[nameKey] = <SceneEach item={item} />;
-  });
   return (
     <Block white>
       <Tab_View routes={routes} scenes={scenes} />

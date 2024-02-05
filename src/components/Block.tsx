@@ -5,14 +5,14 @@ import {
   ScrollView,
   StyleSheet,
   View,
-  ViewStyle,
+  ViewStyle
 } from 'react-native';
-import {BlurView} from 'expo-blur';
-import {LinearGradient} from 'expo-linear-gradient';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import { BlurView } from 'expo-blur';
+import { LinearGradient } from 'expo-linear-gradient';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import useTheme from '../hooks/useTheme';
-import {IBlockProps} from '../constants/types';
+import { IBlockProps } from '../constants/types';
 
 const Block = (props: IBlockProps) => {
   const {
@@ -74,35 +74,35 @@ const Block = (props: IBlockProps) => {
     start,
     ...rest
   } = props;
-  const {colors, sizes} = useTheme();
+  const { colors, sizes } = useTheme();
 
   const colorIndex = primary
     ? 'primary'
     : secondary
-    ? 'secondary'
-    : tertiary
-    ? 'tertiary'
-    : black
-    ? 'black'
-    : white
-    ? 'white'
-    : gray
-    ? 'gray'
-    : danger
-    ? 'danger'
-    : warning
-    ? 'warning'
-    : success
-    ? 'success'
-    : info
-    ? 'info'
-    : null;
+      ? 'secondary'
+      : tertiary
+        ? 'tertiary'
+        : black
+          ? 'black'
+          : white
+            ? 'white'
+            : gray
+              ? 'gray'
+              : danger
+                ? 'danger'
+                : warning
+                  ? 'warning'
+                  : success
+                    ? 'success'
+                    : info
+                      ? 'info'
+                      : null;
 
   const blockColor = color
     ? color
     : colorIndex
-    ? colors?.[colorIndex]
-    : undefined;
+      ? colors?.[colorIndex]
+      : undefined;
 
   const blockStyles = StyleSheet.flatten([
     style,
@@ -130,47 +130,47 @@ const Block = (props: IBlockProps) => {
         shadowRadius: sizes.shadowRadius,
         elevation: sizes.elevation,
       }),
-      ...(margin !== undefined && {margin}),
-      ...(marginBottom && {marginBottom}),
-      ...(marginTop && {marginTop}),
-      ...(marginHorizontal && {marginHorizontal}),
-      ...(marginVertical && {marginVertical}),
-      ...(marginRight && {marginRight}),
-      ...(marginLeft && {marginLeft}),
-      ...(padding !== undefined && {padding}),
-      ...(paddingBottom && {paddingBottom}),
-      ...(paddingTop && {paddingTop}),
-      ...(paddingHorizontal && {paddingHorizontal}),
-      ...(paddingVertical && {paddingVertical}),
-      ...(paddingRight && {paddingRight}),
-      ...(paddingLeft && {paddingLeft}),
-      ...(radius && {borderRadius: radius}),
-      ...(height && {height}),
-      ...(width && {width}),
-      ...(overflow && {overflow}),
-      ...(flex !== undefined && {flex}),
-      ...(row && {flexDirection: 'row'}),
-      ...(align && {alignItems: align}),
-      ...(center && {justifyContent: 'center'}),
-      ...(justify && {justifyContent: justify}),
-      ...(wrap && {flexWrap: wrap}),
-      ...(blockColor && {backgroundColor: blockColor}),
+      ...(margin !== undefined && { margin }),
+      ...(marginBottom && { marginBottom }),
+      ...(marginTop && { marginTop }),
+      ...(marginHorizontal && { marginHorizontal }),
+      ...(marginVertical && { marginVertical }),
+      ...(marginRight && { marginRight }),
+      ...(marginLeft && { marginLeft }),
+      ...(padding !== undefined && { padding }),
+      ...(paddingBottom && { paddingBottom }),
+      ...(paddingTop && { paddingTop }),
+      ...(paddingHorizontal && { paddingHorizontal }),
+      ...(paddingVertical && { paddingVertical }),
+      ...(paddingRight && { paddingRight }),
+      ...(paddingLeft && { paddingLeft }),
+      ...(radius && { borderRadius: radius }),
+      ...(height && { height }),
+      ...(width && { width }),
+      ...(overflow && { overflow }),
+      ...(flex !== undefined && { flex }),
+      ...(row && { flexDirection: 'row' }),
+      ...(align && { alignItems: align }),
+      ...(center && { justifyContent: 'center' }),
+      ...(justify && { justifyContent: justify }),
+      ...(wrap && { flexWrap: wrap }),
+      ...(blockColor && { backgroundColor: blockColor }),
       ...(outlined && {
         borderWidth: 1,
         borderColor: blockColor,
         backgroundColor: 'transparent',
       }),
-      ...(position && {position}),
-      ...(right !== undefined && {right}),
-      ...(left !== undefined && {left}),
-      ...(top !== undefined && {top}),
-      ...(bottom !== undefined && {bottom}),
+      ...(position && { position }),
+      ...(right !== undefined && { right }),
+      ...(left !== undefined && { left }),
+      ...(top !== undefined && { top }),
+      ...(bottom !== undefined && { bottom }),
     },
   ]) as ViewStyle;
 
   // generate component testID or accessibilityLabel based on Platform.OS
   const blockID =
-    Platform.OS === 'android' ? {accessibilityLabel: id} : {testID: id};
+    Platform.OS === 'android' ? { accessibilityLabel: id } : { testID: id };
 
   if (safe) {
     return (
@@ -198,7 +198,7 @@ const Block = (props: IBlockProps) => {
 
   if (scrollHorizontal) {
     return (
-      <ScrollView horizontal={true} {...blockID} {...rest} style={blockStyles}>
+      <ScrollView horizontal={true} {...blockID} {...rest} style={{...blockStyles, flex:1}}>
         {children}
       </ScrollView>
     );

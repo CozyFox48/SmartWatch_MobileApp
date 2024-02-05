@@ -3,9 +3,9 @@ import {
   StackHeaderTitleProps,
   CardStyleInterpolators,
 } from '@react-navigation/stack';
-import {useNavigation} from '@react-navigation/core';
-import {DrawerActions} from '@react-navigation/native';
-import {StackHeaderOptions} from '@react-navigation/stack/lib/typescript/src/types';
+import { useNavigation } from '@react-navigation/core';
+import { DrawerActions } from '@react-navigation/native';
+import { StackHeaderOptions } from '@react-navigation/stack/lib/typescript/src/types';
 
 import Image from '../components/Image';
 import Text from '../components/Text';
@@ -14,16 +14,16 @@ import Button from '../components/Button';
 
 export default () => {
   const navigation = useNavigation();
-  const {icons, colors, sizes, assets} = useTheme();
+  const { icons, colors, sizes, assets } = useTheme();
 
   const menu = {
-    headerStyle: {elevation: 0},
+    headerStyle: { elevation: 0 },
     headerTitleAlign: 'left',
-    headerTitleContainerStyle: {marginLeft: -sizes.sm},
-    headerLeftContainerStyle: {paddingLeft: sizes.s},
-    headerRightContainerStyle: {paddingRight: sizes.s},
+    headerTitleContainerStyle: { marginLeft: -sizes.sm },
+    headerLeftContainerStyle: { paddingLeft: sizes.s },
+    headerRightContainerStyle: { paddingRight: sizes.s },
     cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-    headerTitle: ({children}: StackHeaderTitleProps) => (
+    headerTitle: ({ children }: StackHeaderTitleProps) => (
       <Text h4>{children}</Text>
     ),
     headerLeft: () => (
@@ -52,7 +52,8 @@ export default () => {
           gray
           paddingVertical={sizes.s}
           paddingHorizontal={sizes.sm}
-          margin={sizes.s}>
+          margin={sizes.s}
+          onPress={() => navigation.goBack()}>
           <Image source={assets.arrow_left} />
         </Button>
       ),

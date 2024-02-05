@@ -25,6 +25,7 @@
     "expo-modules-core": "~1.2.7",
     "expo-splash-screen": "^0.18.2",
     "expo-status-bar": "~1.4.4",
+    "firebase": "10.7.1",
     "gifted-charts-core": "^0.0.7",
     "i18n-js": "3.8.0",
     "react": "18.2.0",
@@ -32,6 +33,7 @@
     "react-native": "0.71.8",
     "react-native-chart-kit": "^6.12.0",
     "react-native-collapsible": "^1.6.1",
+    "react-native-flash-message": "^0.4.2",
     "react-native-gesture-handler": "~2.9.0",
     "react-native-keyboard-aware-scroll-view": "0.9.4",
     "react-native-pager-view": "6.1.2",
@@ -45,7 +47,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "@react-native-community/eslint-config": "2.0.0",
     "@types/i18n-js": "3.8.1",
     "@types/react": "~18.0.27",
     "@types/react-native": "0.67.6",

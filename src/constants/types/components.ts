@@ -15,9 +15,9 @@ import {
   ViewProps,
   ViewStyle,
 } from 'react-native';
-import {BlurProps} from 'expo-blur';
-import {LinearGradientPoint} from 'expo-linear-gradient';
-import {ISpacing, ITheme} from './theme';
+import { BlurProps } from 'expo-blur';
+import { LinearGradientPoint } from 'expo-linear-gradient';
+import { ISpacing, ITheme } from './theme';
 
 /**
  * ## Block
@@ -29,9 +29,9 @@ import {ISpacing, ITheme} from './theme';
  */
 export interface IBlockProps
   extends ISpacing,
-    ViewProps,
-    ScrollViewProps,
-    KeyboardAvoidingViewProps {
+  ViewProps,
+  ScrollViewProps,
+  KeyboardAvoidingViewProps {
   /**
    * id for testID & accesibilityLabel
    */
@@ -41,6 +41,7 @@ export interface IBlockProps
    * @see https://reactnative.dev/docs/flexbox#proptypes
    * @see https://reactnative.dev/docs/layout-props
    */
+
   flex?: ViewStyle['flex'];
   /**
    * Renders a View flexDirection: row style

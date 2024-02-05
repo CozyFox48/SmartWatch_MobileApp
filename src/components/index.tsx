@@ -6,13 +6,12 @@ import Modal from './Modal';
 import Switch from './Switch';
 import Checkbox from './Checkbox';
 import Image from './Image';
-import Article from './Article';
-import Product from './Product';
 import Footer from './Footer';
 import DevicesList from './DevicesList';
 import LinkBox from './LinkBox';
 import Alert_each from './Alert_each';
 import Tab_View from './Tab_View';
+import No_Device from './No_device';
 export {
   Block,
   Button,
@@ -21,12 +20,11 @@ export {
   Switch,
   Checkbox,
   Image,
-  Article,
-  Product,
   Modal,
   Footer,
   DevicesList,
   LinkBox,
   Alert_each,
   Tab_View,
+  No_Device,
 };

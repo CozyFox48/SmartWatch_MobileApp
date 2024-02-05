@@ -1,15 +1,27 @@
-import React from 'react';
-import {Dimensions} from 'react-native';
-import {useNavigation} from '@react-navigation/core';
-import {useTheme, useTranslation} from '../hooks/';
-import {Block, Button, Image, Text, Footer} from '../components/';
+import React, { useEffect } from 'react';
+import { Dimensions } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
+import { useTheme, useTranslation, useDatabase } from '../hooks/';
+import { Block, Button, Image, Text, Footer } from '../components/';
 
 const screenWidth = Dimensions.get('window').width;
 
 const Pro = () => {
-  const {t} = useTranslation();
-  const {assets, sizes} = useTheme();
+  const { t } = useTranslation();
+  const { assets, sizes } = useTheme();
   const navigation = useNavigation();
+  useEffect(() => {
+    const fetchData = async () => {
+      const devices = await useDatabase.get_devices();
+      if (devices.length > 0) {
+        navigation.navigate('Screens', {
+          screen: 'Home',
+        })
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <Image
@@ -17,7 +29,7 @@ const Pro = () => {
       width={screenWidth}
       source={assets.background_opening}
       resizeMode={'contain'}
-      style={{flex: 1, justifyContent: 'center'}}>
+      style={{ flex: 1, justifyContent: 'center' }}>
       <Block
         flex={1}
         padding={sizes.sm}
@@ -40,7 +52,7 @@ const Pro = () => {
           paddingHorizontal={sizes.m}
           onPress={() =>
             navigation.navigate('Screens', {
-              screen: 'SignUp',
+              screen: 'SignIn',
             })
           }>
           <Text white bold h5 marginRight={sizes.xs}>

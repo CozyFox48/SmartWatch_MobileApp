@@ -6,6 +6,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import Menu from './Menu';
 import {useData, ThemeProvider, TranslationProvider} from '../hooks';
 
+import FlashMessage from 'react-native-flash-message';
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 export default () => {
@@ -58,6 +59,7 @@ export default () => {
     <TranslationProvider>
       <ThemeProvider theme={theme} setTheme={setTheme}>
         <NavigationContainer theme={navigationTheme}>
+        <FlashMessage position="top" />
           <Menu />
         </NavigationContainer>
       </ThemeProvider>

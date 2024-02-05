@@ -1,17 +1,32 @@
-import React, {useLayoutEffect} from 'react';
-
-import {useNavigation} from '@react-navigation/core';
-import {useHeaderHeight} from '@react-navigation/stack';
-
-import {useTheme, useTranslation} from '../hooks/';
+import React from 'react';
+import { useTheme, useData, useDatabase } from '../hooks/';
 import Block from './Block';
 import Button from './Button';
 import Image from './Image';
 import Text from './Text';
-// cards example
-const Card = ({name, connection, uuid, signal, isNew}) => {
-  const {assets, colors, gradients, sizes} = useTheme();
+import { find_devices } from '../utility/get_random';
+import IIcon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/core';
 
+const Card = ({ name, connection, uuid, signal, index, isNew }) => {
+  const { assets, sizes } = useTheme();
+  const { handleDevices, devices, handleNewDevices, newDevices, setDetailDevice } = useData();
+  const navigation = useNavigation();
+  const submit = () => {
+    handleDevices([...devices, { name: name, uuid: uuid, connection: true, strength: signal }]);
+    let result = [];
+    for (const each of newDevices) {
+      if (each.uuid !== uuid) result.push(each)
+    }
+    handleNewDevices(result);
+    useDatabase.db_add_device({ name: name, uuid: uuid, connection: true, strength: signal })
+  }
+  const navigate2detailDevice = () => {
+    setDetailDevice(index);
+    navigation.navigate('Screens', {
+      screen: 'DeviceDetail',
+    })
+  }
   return (
     <Block card radius={sizes.xxl} gray shadow row marginBottom={sizes.s}>
       <Block
@@ -59,86 +74,76 @@ const Card = ({name, connection, uuid, signal, isNew}) => {
         </Block>
       </Block>
       {isNew ? (
-        <Block
+        <Button
           primary
           justify="center"
           align="center"
           radius={sizes.xxl}
           paddingHorizontal={sizes.m}
+          onPress={submit}
           flex={0}>
           <Text bold h6 white marginLeft={sizes.xs}>
             Connect
           </Text>
-        </Block>
+        </Button>
       ) : (
-        <Block
-          secondary
+        <Button
+
           justify="center"
           align="center"
           radius={sizes.xxl}
           width={sizes.xl}
+          onPress={navigate2detailDevice}
           flex={0}>
           <Image source={assets?.direction_right} />
-        </Block>
+        </Button>
       )}
     </Block>
   );
 };
 
 const Components = () => {
-  const {assets, sizes} = useTheme();
-  const navigation = useNavigation();
-  const headerHeight = useHeaderHeight();
-  const {t} = useTranslation();
-  const devicesDataList = [
-    {name: 'Tom', connection: true, uuid: '1423', signal: '34'},
-    {name: 'Jerry', connection: false, uuid: '4453', signal: '35'},
-    {name: 'Bruce', connection: true, uuid: '9384', signal: '47'},
-  ];
-  const newDevicesDataList = [
-    {name: 'Jack', connection: false, uuid: '1423', signal: '34'},
-  ];
-
+  const { colors, sizes } = useTheme();
+  const { newDevices, handleNewDevices, devices } = useData();
+  const submit = () => {
+    const data = find_devices();
+    handleNewDevices(data);
+  }
   return (
-    <Block safe>
-      
-      <Block scroll showsVerticalScrollIndicator={false}>
-        <Block>
-          <Block paddingHorizontal={sizes.padding}>
-            {devicesDataList.map((each) => (
-              <Card
-                name={each.name}
-                connection={each.connection}
-                uuid={each.uuid}
-                signal={each.signal}
-                key={each.uuid}
-                isNew={false}
-              />
-            ))}
-            {newDevicesDataList.map((each) => (
-              <Card
-                name={each.name}
-                connection={each.connection}
-                uuid={each.uuid}
-                signal={each.signal}
-                key={each.uuid}
-                isNew={true}
-              />
-            ))}
-            <Button
-              row
-              primary
-              radius={sizes.xxl}
-              paddingVertical={sizes.sm}
-              paddingHorizontal={sizes.m}>
-              <Image radius={0} source={assets.qrcode} />
-              <Text bold h5 white marginLeft={sizes.xs}>
-                Scan
-              </Text>
-            </Button>
-          </Block>
-        </Block>
-      </Block>
+    <Block paddingHorizontal={sizes.padding} paddingBottom={sizes.padding}>
+      {devices.map((each, index) => (
+        <Card
+          name={each.name}
+          connection={each.connection}
+          uuid={each.uuid}
+          signal={each.strength}
+          key={each.uuid}
+          index={index}
+          isNew={false}
+        />
+      ))}
+      {newDevices.map((each) => (
+        <Card
+          name={each.name}
+          connection={false}
+          uuid={each.uuid}
+          signal={each.strength}
+          key={each.uuid}
+          isNew={true}
+        />
+      ))}
+      <Button
+        row
+        primary
+        radius={sizes.xxl}
+        paddingVertical={sizes.sm}
+        paddingHorizontal={sizes.m}
+        onPress={submit}>
+        <IIcon name={'qr-code'} color={colors.white} size={20} />
+        <Text bold h5 white marginLeft={sizes.xs}>
+          Scan
+        </Text>
+      </Button>
     </Block>
   );
 };

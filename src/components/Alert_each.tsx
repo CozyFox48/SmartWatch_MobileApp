@@ -2,37 +2,38 @@ import React from 'react';
 
 import Block from './Block';
 import Text from './Text';
-import {useTheme, useTranslation} from '../hooks';
+import { useTheme, useTranslation } from '../hooks';
 import FIcon from 'react-native-vector-icons/FontAwesome5';
 import AIcon from 'react-native-vector-icons/FontAwesome';
 import Oxygen from './../assets/icons/oxygen.js';
 
-const Article = ({data}) => {
-  const {t} = useTranslation();
-  const {colors, gradients, assets, icons, fonts, sizes} = useTheme();
+const Article = ({ data }) => {
+  const { t } = useTranslation();
+  const { colors, gradients, assets, icons, fonts, sizes } = useTheme();
   const color_light = data.hasRead
     ? colors.gray
     : data.type === 'oxygen'
-    ? colors.info_light
-    : data.type === 'temperature'
-    ? colors.danger_light
-    : colors.warning_light;
+      ? colors.info_light
+      : data.type === 'temperature'
+        ? colors.danger_light
+        : colors.warning_light;
 
   const color_middle = data.hasRead
     ? colors.white
     : data.type === 'oxygen'
-    ? colors.info_middle
-    : data.type === 'temperature'
-    ? colors.danger_middle
-    : colors.warning_middle;
+      ? colors.info_middle
+      : data.type === 'temperature'
+        ? colors.danger_middle
+        : colors.warning_middle;
 
   const color = data.hasRead
     ? ''
     : data.type === 'oxygen'
-    ? colors.info
-    : data.type === 'temperature'
-    ? colors.danger
-    : colors.warning;
+      ? colors.info
+      : data.type === 'temperature'
+        ? colors.danger
+        : colors.warning;
+
   const icon =
     data.type === 'temperature' ? (
       <FIcon
@@ -60,7 +61,7 @@ const Article = ({data}) => {
       card
       radius={sizes.xxl}
       color={color_light}
-      
+
       row
       marginBottom={sizes.sm}>
       <Block
@@ -97,10 +98,10 @@ const Article = ({data}) => {
           {data.type === 'heart_rate'
             ? 'bpm'
             : data.type === 'temperature'
-            ? '°C'
-            : data.type === 'oxygen'
-            ? '%'
-            : ''}
+              ? '°C'
+              : data.type === 'oxygen'
+                ? '%'
+                : ''}
         </Text>
       </Block>
     </Block>
