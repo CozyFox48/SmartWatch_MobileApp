@@ -13,7 +13,7 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const [settingTab, setSettingTab] = useState<string>('');
   const [detailDevice, setDetailDevice]=useState<number>(0);
   const [values, setValues]=useState({});
-  const [alerts, setAlerts]=useState<IAlert[]>([]);
+  const [alerts, setAlerts]=useState<any[]>([]);
   const [userData, setUserData]=useState({});
 
   const handleNewDevices = useCallback(

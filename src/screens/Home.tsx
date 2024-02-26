@@ -13,11 +13,6 @@ const SceneEach = ({ item, index }) => {
   const { colors, fonts, sizes, } = useTheme();
   const { values } = useData()
   const { t } = useTranslation();
-  const [value, setValue]=useState({});
-
-  useEffect(()=>{
-    setValue(values[item.deviceID]);
-  },[values]);
 
   return (
     <Block white>
@@ -40,7 +35,7 @@ const SceneEach = ({ item, index }) => {
           </Block>
           <Block flex={0} row align="flex-end">
             <Text font={fonts.normal} h0 color={colors.warning}>
-              {value?.heart?.current||0}
+              {values[item.deviceID]?.heart?.current||0}
             </Text>
             <Text
               font={fonts.normal}
@@ -80,7 +75,7 @@ const SceneEach = ({ item, index }) => {
           </Text>
 
           <Text h0 font={fonts.normal} color={colors.primary} align='center' >
-            {value?.temperature?.current||0}
+            {values[item.deviceID]?.temperature?.current||0}
             {t('alert.unit_temp')}
           </Text>
 
@@ -105,7 +100,7 @@ const SceneEach = ({ item, index }) => {
             {t('alert.oxygen')}
           </Text>
           <Text h0 font={fonts.normal} align='center' color={colors.info}>
-            {value?.oxygen?.current||0}
+            {values[item.deviceID]?.oxygen?.current||0}
             {t('alert.unit_oxygen')}
           </Text>
         </Block>

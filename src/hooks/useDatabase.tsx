@@ -56,7 +56,7 @@ const set_data = async (finalResult, currentMinute) => {
             lowAlertCount: result[deviceID][eachType].lowAlertCount,
             date: parseInt(day)
           });
-          console.log('Created new date ' + day);
+          // console.log('Created new date ' + day);
         }
         const DayRef = collection(doc(typeRef, day), 'data');
         await setDoc(doc(DayRef, minute), { value: result[deviceID][eachType].average });

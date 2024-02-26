@@ -47,8 +47,8 @@ export interface IUseData {
   setDetailDevice: (data: string) => void;
   values: any,
   setValues: (data: any) => void;
-  alerts: IAlert[],
-  setAlerts: (data: IAlert[]) => void;
+  alerts: any[],
+  setAlerts: (data: any[]) => void;
   userData: any,
   handleUserData: (data: any) => void;
   settingTab: string;

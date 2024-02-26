@@ -9,8 +9,7 @@ import {
   useTranslation,
 } from '../hooks/useTranslation';
 import FIcon from 'react-native-vector-icons/FontAwesome5';
-import AIcon from 'react-native-vector-icons/FontAwesome';
-import Oxygen from './../assets/icons/oxygen.js';
+import { Alert_each } from '../components';
 
 export default () => {
   const { colors, sizes } = useTheme();
@@ -52,18 +51,18 @@ export default () => {
     ),
   });
 
-  // const notify_alert = (message: any) => showMessage({
-  //   message: '',
-  //   duration: 2000,
-  //   backgroundColor: 'transparent',
-  //   position: 'top',
-  //   titleStyle: { fontSize: 0, height: 0 },
-  //   renderCustomContent: () => (
-  //     <Block card row align='center' radius={sizes.xl} paddingHorizontal={sizes.sm}>
-  //       <Alert_each data={message} />
-  //     </Block>
-  //   ),
-  // });
+  const notify_alert = (message: any) => showMessage({
+    message: '',
+    duration: 2000,
+    backgroundColor: 'transparent',
+    position: 'top',
+    titleStyle: { fontSize: 0, height: 0 },
+    renderCustomContent: () => (
+    
+        <Alert_each data={message} />
+ 
+    ),
+  });
 
-  return { notify_fail, notify_success };
+  return { notify_fail, notify_success, notify_alert };
 }

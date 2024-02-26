@@ -7,11 +7,11 @@ import Oxygen from './../assets/icons/oxygen.js';
 import { Dimensions } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import {Calendar, LocaleConfig} from 'react-native-calendars';
-const screenWidth = Dimensions.get('window').width;
+// const screenWidth = Dimensions.get('window').width;
 const SceneEach = ({ item }) => {
   const { colors, fonts, sizes } = useTheme();
   const { t } = useTranslation();
-  const [activeIndex, setActiveIndex] = useState(null);
+  // const [activeIndex, setActiveIndex] = useState(null);
   const [selected, setSelected] = useState('');
   const categoryData = [
     {
@@ -36,42 +36,42 @@ const SceneEach = ({ item }) => {
       icon: <AIcon name={'heartbeat'} color={colors.warning} size={25} />,
     },
   ];
-  const data = {
-    labels: [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-    ],
-    datasets: [
-      {
-        data: [36.5, 36.6, 36.6, 36.6, 36.5, 36.6, 36.5, 36.5, 36.6, 36.6, 36.6, 36.6],
-        color: () => colors.primary,
-        strokeWidth: 2,
-      },
-    ],
-  };
+  // const data = {
+  //   labels: [
+  //     'Jan',
+  //     'Feb',
+  //     'Mar',
+  //     'Apr',
+  //     'Jan',
+  //     'Feb',
+  //     'Mar',
+  //     'Apr',
+  //     'Jan',
+  //     'Feb',
+  //     'Mar',
+  //     'Apr',
+  //   ],
+  //   datasets: [
+  //     {
+  //       data: [36.5, 36.6, 36.6, 36.6, 36.5, 36.6, 36.5, 36.5, 36.6, 36.6, 36.6, 36.6],
+  //       color: () => colors.primary,
+  //       strokeWidth: 2,
+  //     },
+  //   ],
+  // };
 
-  const chartConfig = {
-    backgroundGradientFrom: colors.white,
-    backgroundGradientTo: colors.white,
-    decimalPlaces: 2,
-    color: () => colors.primary,
-    labelColor: () => colors.text,
-    propsForDots: {
-      r: '6',
-      strokeWidth: '2',
-      stroke: colors.darkGray,
-    },
-  };
+  // const chartConfig = {
+  //   backgroundGradientFrom: colors.white,
+  //   backgroundGradientTo: colors.white,
+  //   decimalPlaces: 2,
+  //   color: () => colors.primary,
+  //   labelColor: () => colors.text,
+  //   propsForDots: {
+  //     r: '6',
+  //     strokeWidth: '2',
+  //     stroke: colors.darkGray,
+  //   },
+  // };
   return (
     <Block white>
       <Block marginTop={sizes.s}>
@@ -104,7 +104,7 @@ const SceneEach = ({ item }) => {
             ))}
           </Block>
         </Block>
-        <Block flex={0} row align="center" padding={sizes.s} marginBottom={sizes.s}>
+        {/* <Block flex={0} row align="center" padding={sizes.s} marginBottom={sizes.s}>
           <Text p bold flex={1}>
             Temperature History
           </Text>
@@ -138,8 +138,8 @@ const SceneEach = ({ item }) => {
               Week
             </Text>
           </Block>
-        </Block>
-        <LineChart
+        </Block> */}
+        {/* <LineChart
           data={data}
           width={screenWidth}
           height={300}
@@ -172,7 +172,7 @@ const SceneEach = ({ item }) => {
               <></>
             );
           }}
-        />
+        /> */}
       </Block>
     </Block>
   );

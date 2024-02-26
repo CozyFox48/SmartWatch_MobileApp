@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Platform, StatusBar } from 'react-native';
 import { useFonts } from 'expo-font';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import * as SplashScreen from 'expo-splash-screen';
 import Menu from './Menu';
-import { useData, ThemeProvider, TranslationProvider, useDatabase } from '../hooks';
+import { useData, ThemeProvider, TranslationProvider, useDatabase, useNotify } from '../hooks';
 import { getRandomNumber } from '../utility/get_random';
 import { getCurrentFormattedDateTime } from '../utility/date_formatter';
 import FlashMessage from 'react-native-flash-message';
@@ -14,7 +13,8 @@ SplashScreen.preventAutoHideAsync();
 export default () => {
   const { isDark, theme, setTheme, devices, setValues, setAlerts, alerts } = useData();
   const currentMinute = useRef(getCurrentFormattedDateTime());
-  const checkAbnormal = (value: number, type: string, deviceID: string) => {
+  const { notify_alert } = useNotify();
+  const checkAbnormal = async (value: number, type: string, deviceID: string) => {
     try {
       let result: any = {}
       if ((type == "oxygen" && value < 94) || (type == "temperature" && value < 36) || (type == "heart" && value < 60)) {
@@ -35,11 +35,10 @@ export default () => {
           deviceID: deviceID,
           hasRead: false
         }
+        notify_alert(result);
         // useDatabase.db_add_alert(result);
-        let temp_alerts = alerts || [];
-        temp_alerts.push(result);
-        setAlerts(temp_alerts);
-        // notify_alert(temp_alerts);
+        setAlerts((prev: any) => { return [result, ...prev]; });
+
         return { high: result.isHighValue ? 1 : 0, low: result.isHighValue ? 0 : 1 };
       }
       return { high: 0, low: 0 };
@@ -125,7 +124,6 @@ export default () => {
 
             currentMinute.current = dateNow1
           }
-          // console.log('finalResult', finalResult);
           return finalResult;
         })
       }

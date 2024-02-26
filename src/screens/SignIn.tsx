@@ -72,7 +72,6 @@ const Home = () => {
                     screen: 'Home',
                   });
                   const alerts = await useDatabase.get_alerts();
-                  console.log("alerts", alerts);
                   setAlerts(alerts);
                   const tempUserData = await useDatabase.get_user_data();
                   handleUserData(tempUserData);
