@@ -37,7 +37,7 @@ export default () => {
         }
         notify_alert(result);
         // useDatabase.db_add_alert(result);
-        setAlerts((prev: any) => { return [result, ...prev]; });
+        // setAlerts((prev: any) => { return [result, ...prev]; });
 
         return { high: result.isHighValue ? 1 : 0, low: result.isHighValue ? 0 : 1 };
       }

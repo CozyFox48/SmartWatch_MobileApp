@@ -1,110 +1,159 @@
-import React, { useState } from 'react';
-import { useTheme, useTranslation, useNotify } from '../hooks';
+import React, { useState, useEffect } from 'react';
+import { useTheme, useTranslation, useData, useDatabase } from '../hooks';
 import { Block, LinkBox, Text, Tab_View, Button } from '../components';
 import FIcon from 'react-native-vector-icons/FontAwesome5';
 import AIcon from 'react-native-vector-icons/FontAwesome';
 import Oxygen from './../assets/icons/oxygen.js';
 import { Dimensions } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
-import {Calendar, LocaleConfig} from 'react-native-calendars';
-// const screenWidth = Dimensions.get('window').width;
+import { Calendar, LocaleConfig } from 'react-native-calendars';
+
 const SceneEach = ({ item }) => {
   const { colors, fonts, sizes } = useTheme();
+  const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
-  // const [activeIndex, setActiveIndex] = useState(null);
   const [selected, setSelected] = useState('');
-  const categoryData = [
-    {
-      id: 'temperature',
-      title: t('alert.temperature'),
-      color: colors.danger,
-      color_light: colors.danger_light,
-      icon: <FIcon name={'temperature-high'} color={colors.danger} size={25} />,
-    },
-    {
-      id: 'oxygen',
-      title: t('alert.oxygen'),
-      color: colors.info,
-      color_light: colors.info_light,
-      icon: <Oxygen width={25} height={25} color={colors.info} />,
-    },
-    {
-      id: 'heart_rate',
-      title: t('alert.heart_rate'),
-      color: colors.warning,
-      color_light: colors.warning_light,
-      icon: <AIcon name={'heartbeat'} color={colors.warning} size={25} />,
-    },
-  ];
-  // const data = {
-  //   labels: [
-  //     'Jan',
-  //     'Feb',
-  //     'Mar',
-  //     'Apr',
-  //     'Jan',
-  //     'Feb',
-  //     'Mar',
-  //     'Apr',
-  //     'Jan',
-  //     'Feb',
-  //     'Mar',
-  //     'Apr',
-  //   ],
-  //   datasets: [
-  //     {
-  //       data: [36.5, 36.6, 36.6, 36.6, 36.5, 36.6, 36.5, 36.5, 36.6, 36.6, 36.6, 36.6],
-  //       color: () => colors.primary,
-  //       strokeWidth: 2,
-  //     },
-  //   ],
-  // };
+  const [dotted, setDotted] = useState({});
+  const [value, setValue] = useState({});
 
-  // const chartConfig = {
-  //   backgroundGradientFrom: colors.white,
-  //   backgroundGradientTo: colors.white,
-  //   decimalPlaces: 2,
-  //   color: () => colors.primary,
-  //   labelColor: () => colors.text,
-  //   propsForDots: {
-  //     r: '6',
-  //     strokeWidth: '2',
-  //     stroke: colors.darkGray,
-  //   },
-  // };
+  const oxygen_dot = { key: 'oxygen_dot', color: 'red' };
+  const temperature_dot = { key: 'temperature_dot', color: 'blue' };
+  const heart_dot = { key: 'heart_dot', color: 'green' };
+
+  const get_data = async (year, month) => {
+    setLoading(true);
+    const result = await useDatabase.get_month_date(year, month, item.deviceID);
+    const finalResult = {};
+    for (let key in result) {
+      finalResult[key] = { dots: [] };
+      if (result[key]['heart']?.highAlertCount + result[key]['heart']?.lowAlertCount > 0) finalResult[key]['dots'].push(heart_dot);
+      if (result[key]['temperature']?.highAlertCount + result[key]['temperature']?.lowAlertCount > 0) finalResult[key]['dots'].push(temperature_dot);
+      if (result[key]['oxygen']?.highAlertCount + result[key]['oxygen']?.lowAlertCount > 0) finalResult[key]['dots'].push(oxygen_dot);
+      setDotted(finalResult);
+      setValue(result);
+    }
+    setLoading(false);
+  }
+  useEffect(() => {
+    const currentTime = new Date();
+    get_data(currentTime.getFullYear(), currentTime.getMonth() + 1)
+  }, [item.deviceID]);
+
   return (
     <Block white>
       <Block marginTop={sizes.s}>
         <Block flex={0}>
           <Calendar
+            markingType={'multi-dot'}
+            displayLoadingIndicator={loading}
             onDayPress={day => {
               setSelected(day.dateString);
             }}
+            onMonthChange={month => {
+              console.log('month changed', month);
+            }}
             markedDates={{
-              [selected]: { selected: true, disableTouchEvent: true, selectedDotColor: 'orange' }
+              ...dotted,
+              [selected]: { selected: true, disableTouchEvent: true, marked: true, selectedColor: 'orange', ...dotted[selected] },
             }}
           />
-          <Block row flex={0} scrollHorizontal>
-            {categoryData.map((each, index) => (
-              <Block
-                flex={0}
-                key={index}
-                padding={sizes.sm}
-                margin={sizes.s}
-                row
-                radius={sizes.m}
-                color={each.color_light}
-                center
-                align="center">
-                {each.icon}
-                <Text color={each.color} h5 paddingLeft={sizes.s}>
-                  {each.title}
-                </Text>
-              </Block>
-            ))}
-          </Block>
         </Block>
-        {/* <Block flex={0} row align="center" padding={sizes.s} marginBottom={sizes.s}>
+      </Block>
+    </Block>
+  );
+};
+
+const Home = () => {
+  const { sizes } = useTheme();
+  const [routes, setRoutes] = useState([]);
+  const [scenes, setScenes] = useState({});
+  const { devices } = useData();
+
+  useEffect(() => {
+    let tempRoutes = devices.map((each) => {
+      return { id: each.deviceID, title: each.name }
+    });
+    setRoutes(tempRoutes);
+    const tempScenes = {};
+    devices.map((each) => {
+      tempScenes[each.deviceID] = <SceneEach item={each} />;
+    });
+    setScenes(tempScenes);
+  }, [devices])
+  return (
+    <Block white>
+      <Tab_View routes={routes} scenes={scenes} />
+      <Block flex={0} marginBottom={sizes.sm}>
+        <LinkBox />
+      </Block>
+    </Block>
+  );
+};
+
+export default Home;
+
+// const screenWidth = Dimensions.get('window').width;
+// const [activeIndex, setActiveIndex] = useState(null);
+// const categoryData = [
+//   {
+//     id: 'temperature',
+//     title: t('alert.temperature'),
+//     color: colors.danger,
+//     color_light: colors.danger_light,
+//     icon: <FIcon name={'temperature-high'} color={colors.danger} size={25} />,
+//   },
+//   {
+//     id: 'oxygen',
+//     title: t('alert.oxygen'),
+//     color: colors.info,
+//     color_light: colors.info_light,
+//     icon: <Oxygen width={25} height={25} color={colors.info} />,
+//   },
+//   {
+//     id: 'heart_rate',
+//     title: t('alert.heart_rate'),
+//     color: colors.warning,
+//     color_light: colors.warning_light,
+//     icon: <AIcon name={'heartbeat'} color={colors.warning} size={25} />,
+//   },
+// ];
+// const data = {
+//   labels: [
+//     'Jan',
+//     'Feb',
+//     'Mar',
+//     'Apr',
+//     'Jan',
+//     'Feb',
+//     'Mar',
+//     'Apr',
+//     'Jan',
+//     'Feb',
+//     'Mar',
+//     'Apr',
+//   ],
+//   datasets: [
+//     {
+//       data: [36.5, 36.6, 36.6, 36.6, 36.5, 36.6, 36.5, 36.5, 36.6, 36.6, 36.6, 36.6],
+//       color: () => colors.primary,
+//       strokeWidth: 2,
+//     },
+//   ],
+// };
+
+// const chartConfig = {
+//   backgroundGradientFrom: colors.white,
+//   backgroundGradientTo: colors.white,
+//   decimalPlaces: 2,
+//   color: () => colors.primary,
+//   labelColor: () => colors.text,
+//   propsForDots: {
+//     r: '6',
+//     strokeWidth: '2',
+//     stroke: colors.darkGray,
+//   },
+// };
+{/* <Block flex={0} row align="center" padding={sizes.s} marginBottom={sizes.s}>
           <Text p bold flex={1}>
             Temperature History
           </Text>
@@ -139,7 +188,7 @@ const SceneEach = ({ item }) => {
             </Text>
           </Block>
         </Block> */}
-        {/* <LineChart
+{/* <LineChart
           data={data}
           width={screenWidth}
           height={300}
@@ -173,50 +222,22 @@ const SceneEach = ({ item }) => {
             );
           }}
         /> */}
-      </Block>
-    </Block>
-  );
-};
-
-const Home = () => {
-  const { sizes } = useTheme();
-
-  const data = [
-    {
-      name: 'Tom',
-      temperature: 37.4,
-      oxygen: 89,
-      heart_rate: 75,
-    },
-    {
-      name: 'Jerry',
-      temperature: 36.6,
-      oxygen: 92,
-      heart_rate: 80,
-    },
-    {
-      name: 'Bruce',
-      temperature: 36.3,
-      oxygen: 94,
-      heart_rate: 75,
-    },
-  ];
-  const routes = data.map((each) => {
-    return { id: each.name, title: each.name };
-  });
-  const scenes = {};
-  data.forEach((item) => {
-    const nameKey = item.name;
-    scenes[nameKey] = <SceneEach item={item} />;
-  });
-  return (
-    <Block white>
-      <Tab_View routes={routes} scenes={scenes} />
-      <Block flex={0} marginBottom={sizes.sm}>
-        <LinkBox />
-      </Block>
-    </Block>
-  );
-};
-
-export default Home;
+{/* <Block row flex={0} scrollHorizontal>
+            {categoryData.map((each, index) => (
+              <Block
+                flex={0}
+                key={index}
+                padding={sizes.sm}
+                margin={sizes.s}
+                row
+                radius={sizes.m}
+                color={each.color_light}
+                center
+                align="center">
+                {each.icon}
+                <Text color={each.color} h5 paddingLeft={sizes.s}>
+                  {each.title}
+                </Text>
+              </Block>
+            ))}
+          </Block> */}

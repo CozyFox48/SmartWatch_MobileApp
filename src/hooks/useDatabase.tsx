@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { IAlert, IDevice } from '../constants/types';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { getFirestore, doc, getDocs, setDoc, collection, query, limit, orderBy, getDoc, updateDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDocs, setDoc, collection, query, limit, orderBy, getDoc, updateDoc, where } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDznYm917S6YgEzgzPtMcXFMzXMfUeZVow',
@@ -189,4 +189,23 @@ const update_user_data = async (userData) => {
   }
 }
 
-export default { db_signup, db_signin, db_add_device, get_devices, db_add_alert, get_alerts, get_user_data, update_user_data, set_data };
+const get_month_date = async (year, month, deviceID) => {
+  let result = {  };
+  if (auth.currentUser) {
+    for (const eachType of ['oxygen', 'heart', 'temperature']) {
+      const typeRef = collection(doc(db, 'users', auth.currentUser.uid, 'devices', deviceID), eachType);
+      const typeQuery = query(typeRef, where('date', '>=', year * 10000 + month * 100), where('date', '<=', year * 10000 + month * 100 + 100));
+      const typeSnapshot = await getDocs(typeQuery);
+      if (!typeSnapshot.empty) {
+        typeSnapshot.docs.forEach((documentSnapshot) => {
+          const date=documentSnapshot.data().date.toString();
+          const dateKey=`${date.substring(0, 4)}-${date.substring(4, 6)}-${date.substring(6, 8)}`;
+          if (!result[dateKey]) result[dateKey]={}; 
+          result[dateKey][eachType]=documentSnapshot.data()
+        });
+      }
+    }
+  }
+  return result;
+}
+export default { db_signup, db_signin, db_add_device, get_devices, db_add_alert, get_alerts, get_user_data, update_user_data, set_data, get_month_date };
