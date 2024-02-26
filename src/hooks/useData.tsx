@@ -1,8 +1,6 @@
 import React, { useCallback, useContext, useState, useEffect } from 'react';
-
-import { INewDevice, IUseData, ITheme, IDevice } from '../constants/types';
+import { INewDevice, IUseData, ITheme, IDevice, IAlert } from '../constants/types';
 import Storage from '@react-native-async-storage/async-storage';
-
 import { light } from '../constants';
 
 export const DataContext = React.createContext({});
@@ -14,6 +12,10 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const [isDark, setIsDark] = useState(false);
   const [settingTab, setSettingTab] = useState<string>('');
   const [detailDevice, setDetailDevice]=useState<number>(0);
+  const [values, setValues]=useState({});
+  const [alerts, setAlerts]=useState<IAlert[]>([]);
+  const [userData, setUserData]=useState({});
+
   const handleNewDevices = useCallback(
     (payload: INewDevice[]) => {
       if (JSON.stringify(payload) !== JSON.stringify(newDevices)) {
@@ -23,8 +25,17 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
     [newDevices, setNewDevices],
   );
 
+  const handleUserData = useCallback(
+    (payload) => {
+      if (JSON.stringify(payload) !== JSON.stringify(userData)) {
+        setUserData(payload);
+      }
+    },
+    [setUserData, userData],
+  );
+
   const handleDevices = useCallback(
-    (payload: IDevice[]) => {
+    (payload:IDevice[]) => {
       if (JSON.stringify(payload) !== JSON.stringify(devices)) {
         setDevices(payload);
       }
@@ -72,7 +83,13 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
     handleDevices,
     devices,
     detailDevice, 
-    setDetailDevice
+    setDetailDevice,
+    values,
+    setValues,
+    alerts,
+    setAlerts,
+    userData,
+    handleUserData
   };
 
   useEffect(() => {

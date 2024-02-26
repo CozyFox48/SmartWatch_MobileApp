@@ -3,12 +3,12 @@ import { Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import { useTheme, useTranslation, useDatabase } from '../hooks/';
 import { Block, Button, Image, Text, Footer } from '../components/';
-
+import IIcon from 'react-native-vector-icons/AntDesign';
 const screenWidth = Dimensions.get('window').width;
 
 const Pro = () => {
   const { t } = useTranslation();
-  const { assets, sizes } = useTheme();
+  const { assets, sizes, colors } = useTheme();
   const navigation = useNavigation();
   useEffect(() => {
     const fetchData = async () => {
@@ -58,7 +58,7 @@ const Pro = () => {
           <Text white bold h5 marginRight={sizes.xs}>
             {t('menu.started')}
           </Text>
-          <Image source={assets.arrow_right} />
+          <IIcon name={'arrowright'} color={colors.white} size={25} />
         </Button>
       </Block>
 

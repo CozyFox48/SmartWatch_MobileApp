@@ -827,6 +827,10 @@ export interface ITextProps extends TextProps, ISpacing {
    * Renders a Text with predefined fontSize from theme sizes.h1
    * @see https://reactnative.dev/docs/text-style-props#fontsize
    */
+  h0?: boolean;/**
+   * Renders a Text with predefined fontSize from theme sizes.h1
+   * @see https://reactnative.dev/docs/text-style-props#fontsize
+   */
   h1?: boolean;
   /**
    * Renders a Text with predefined fontSize from theme sizes.h2

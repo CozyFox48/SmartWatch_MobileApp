@@ -11,6 +11,7 @@ import Image from '../components/Image';
 import Text from '../components/Text';
 import useTheme from '../hooks/useTheme';
 import Button from '../components/Button';
+import IIcon from 'react-native-vector-icons/AntDesign';
 
 export default () => {
   const navigation = useNavigation();
@@ -54,7 +55,7 @@ export default () => {
           paddingHorizontal={sizes.sm}
           margin={sizes.s}
           onPress={() => navigation.goBack()}>
-          <Image source={assets.arrow_left} />
+          <IIcon name={'arrowleft'} color={colors.black} size={25} />
         </Button>
       ),
     }

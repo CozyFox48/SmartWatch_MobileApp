@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { useTheme, useTranslation, useData } from '../hooks';
+import { useTheme, useTranslation, useData, useDatabase } from '../hooks';
 import { Block, Text, Input, Button, Image, LinkBox, No_Device, DevicesList } from '../components';
+import SetName from '../components/setting-setName';
 import Collapsible from 'react-native-collapsible';
 import FIcon from 'react-native-vector-icons/FontAwesome';
 import F6Icon from 'react-native-vector-icons/FontAwesome5';
 import MIcon from 'react-native-vector-icons/MaterialIcons';
 import IIcon from 'react-native-vector-icons/Ionicons';
-
+import LanguageComponent from "./../components/setting-language";
 const Collapse_Each = ({ collapse, setCollapse, data }) => {
   const { sizes, colors, fonts } = useTheme();
   return (
@@ -39,7 +40,8 @@ const Collapse_Each = ({ collapse, setCollapse, data }) => {
           />
         </Block>
       </Button>
-      <Collapsible collapsed={collapse !== data.id}>{data.content}</Collapsible>
+      {/* <Collapsible collapsed={collapse !== data.id}>{data.content}</Collapsible> */}
+      {collapse === data.id?data.content:<></>}
     </Block>
   );
 };
@@ -49,67 +51,6 @@ const Home = () => {
   const { t } = useTranslation();
   const { settingTab } = useData();
   const [collapse, setCollapse] = useState(settingTab);
-
-  const SetName = () => {
-    return (
-      <Block flex={0}>
-        <Block padding={sizes.s} flex={0}>
-          <Input label={t('common.name')} placeholder={t('common.search')} />
-        </Block>
-        <Block padding={sizes.s} row center marginBottom={sizes.s}>
-          <Button primary paddingHorizontal={sizes.m} flex={0}>
-            <Text white bold h5>
-              {t('setting.save') + ' ' + t('setting.change')}
-            </Text>
-          </Button>
-        </Block>
-      </Block>
-    );
-  };
-
-  const LanguageComponent = () => {
-    const countries = [
-      {
-        id: 'english',
-        name: t('setting.english'),
-        svgFile: assets.flag_uk,
-      },
-      {
-        id: 'french',
-        name: t('setting.french'),
-        svgFile: assets.flag_france,
-      },
-      {
-        id: 'spanish',
-        name: t('setting.spanish'),
-        svgFile: assets.flag_spain,
-      },
-    ];
-    return (
-      <Block row>
-        {countries.map((each, key) => {
-          return (
-            <Block padding={sizes.s} key={key}>
-              <Button shadow>
-                <Image
-                  source={each.svgFile}
-                  height={sizes.xxl}
-                  width={sizes.xxl}
-                />
-                <Text
-                  font={each.id === 'english' ? fonts.bold : ''}
-                  size={each.id === 'english' ? sizes.h5 : sizes.text}
-                  paddingTop={sizes.s}
-                  color={each.id === 'english' ? colors.primary : ''}>
-                  {each.name}
-                </Text>
-              </Button>
-            </Block>
-          );
-        })}
-      </Block>
-    );
-  };
 
   const ColorComponent = () => {
     const colorsData = [

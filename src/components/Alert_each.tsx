@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Block from './Block';
 import Text from './Text';
-import { useTheme, useTranslation } from '../hooks';
+import { useTheme, useTranslation, useData } from '../hooks';
 import FIcon from 'react-native-vector-icons/FontAwesome5';
 import AIcon from 'react-native-vector-icons/FontAwesome';
 import Oxygen from './../assets/icons/oxygen.js';
+import { formatDate } from './../utility/date_formatter';
 
 const Article = ({ data }) => {
   const { t } = useTranslation();
-  const { colors, gradients, assets, icons, fonts, sizes } = useTheme();
+  const { colors, fonts, sizes } = useTheme();
+  const { devices } = useData();
+  const [mapping, setMapping]= useState({})
+  
+  useEffect(() => {
+    let result={};
+    devices.forEach((each, key)=>{
+      result[each.deviceID]=each.name
+    });
+    setMapping(result);
+  }, [devices])
+
   const color_light = data.hasRead
     ? colors.gray
     : data.type === 'oxygen'
@@ -41,7 +53,7 @@ const Article = ({ data }) => {
         color={data.hasRead ? colors.text : colors.danger}
         size={30}
       />
-    ) : data.type === 'heart_rate' ? (
+    ) : data.type === 'heart' ? (
       <AIcon
         name={'heartbeat'}
         color={data.hasRead ? colors.text : colors.warning}
@@ -76,17 +88,14 @@ const Article = ({ data }) => {
 
       <Block flex={0} marginHorizontal={sizes.s}>
         <Text h5 color={color} semibold>
-          {t('alert.' + data.status)} {t('alert.' + data.type)}
+          {t('alert.' + (data.isHighValue ? 'high' : 'low'))} {t('alert.' + data.type)}
         </Text>
         <Block row>
-          <Text text color={color} marginHorizontal={sizes.xs}>
-            {data.name}
+          <Text color={color} marginHorizontal={sizes.xs}>
+            {mapping[data.deviceID]}
           </Text>
-          <Text text marginHorizontal={sizes.xs}>
-            •
-          </Text>
-          <Text text marginHorizontal={sizes.xs}>
-            {data.time}
+          <Text marginHorizontal={sizes.xs}>
+            {formatDate(data.date)}
           </Text>
         </Block>
       </Block>
@@ -95,7 +104,7 @@ const Article = ({ data }) => {
           {data.value}
         </Text>
         <Text h5 font={fonts.normal} color={color}>
-          {data.type === 'heart_rate'
+          {data.type === 'heart'
             ? 'bpm'
             : data.type === 'temperature'
               ? '°C'

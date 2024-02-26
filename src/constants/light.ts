@@ -112,6 +112,7 @@ export const SIZES: ThemeSizes = {
   padding: 20,
 
   // font sizes
+  h0: 50,
   h1: 44,
   h2: 40,
   h3: 32,

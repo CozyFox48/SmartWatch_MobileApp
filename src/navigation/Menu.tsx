@@ -1,6 +1,5 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {Alert, Animated, Linking, StyleSheet} from 'react-native';
-
 import {
   useIsDrawerOpen,
   createDrawerNavigator,
@@ -8,14 +7,12 @@ import {
   DrawerContentOptions,
   DrawerContentScrollView,
 } from '@react-navigation/drawer';
-
 import Screens from './Screens';
 import {Block, Text, Switch, Button, Image} from '../components';
 import {useData, useTheme, useTranslation} from '../hooks';
 
 const Drawer = createDrawerNavigator();
 
-/* drawer menu screens navigation */
 const ScreensStack = () => {
   const {colors} = useTheme();
   const isDrawerOpen = useIsDrawerOpen();
@@ -55,7 +52,6 @@ const ScreensStack = () => {
           borderWidth: isDrawerOpen ? 1 : 0,
         },
       ])}>
-      {/*  */}
       <Screens />
     </Animated.View>
   );

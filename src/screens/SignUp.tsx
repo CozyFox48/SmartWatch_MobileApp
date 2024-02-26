@@ -31,7 +31,7 @@ const Home = () => {
         <Input
           label={t('common.password')}
           placeholder={t('common.input_here')}
-          textContentType='password'
+          secureTextEntry={true}
           value={password}
           marginTop={sizes.s}
           onChangeText={(text) => {
@@ -50,6 +50,7 @@ const Home = () => {
         <Input
           label={t('common.confirm_password')}
           placeholder={t('common.input_here')}
+          secureTextEntry={true}
           value={rePassword}
           marginTop={sizes.s}
           onChangeText={(text) => setRePassword(text)}

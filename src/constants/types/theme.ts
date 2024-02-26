@@ -140,6 +140,7 @@ export interface ThemeSizes {
   radius: number;
   padding: number;
 
+  h0: number;
   h1: number;
   h2: number;
   h3: number;
@@ -199,6 +200,7 @@ export interface ThemeSpacing {
 
 export interface ThemeWeights {
   text: TextStyle['fontWeight'];
+  h0?: TextStyle['fontWeight'];
   h1?: TextStyle['fontWeight'];
   h2?: TextStyle['fontWeight'];
   h3?: TextStyle['fontWeight'];
@@ -221,45 +223,6 @@ export interface ThemeIcons {
   flag_uk: ImageSourcePropType;
   flag_france: ImageSourcePropType;
   flag_spain: ImageSourcePropType;
-  qrcode: ImageSourcePropType;
-  direction_right: ImageSourcePropType;
-  arrow_right: ImageSourcePropType;
-  arrow_left: ImageSourcePropType;
-  apple: ImageSourcePropType;
-  google: ImageSourcePropType;
-  facebook: ImageSourcePropType;
-  arrow: ImageSourcePropType;
-  articles: ImageSourcePropType;
-  basket: ImageSourcePropType;
-  bell: ImageSourcePropType;
-  calendar: ImageSourcePropType;
-  chat: ImageSourcePropType;
-  check: ImageSourcePropType;
-  clock: ImageSourcePropType;
-  close: ImageSourcePropType;
-  components: ImageSourcePropType;
-  document: ImageSourcePropType;
-  documentation: ImageSourcePropType;
-  extras: ImageSourcePropType;
-  flight: ImageSourcePropType;
-  home: ImageSourcePropType;
-  hotel: ImageSourcePropType;
-  image: ImageSourcePropType;
-  location: ImageSourcePropType;
-  menu: ImageSourcePropType;
-  more: ImageSourcePropType;
-  notification: ImageSourcePropType;
-  office: ImageSourcePropType;
-  payment: ImageSourcePropType;
-  profile: ImageSourcePropType;
-  register: ImageSourcePropType;
-  rental: ImageSourcePropType;
-  search: ImageSourcePropType;
-  settings: ImageSourcePropType;
-  star: ImageSourcePropType;
-  train: ImageSourcePropType;
-  users: ImageSourcePropType;
-  warning: ImageSourcePropType;
 }
 
 export interface ThemeAssets {
@@ -270,34 +233,8 @@ export interface ThemeAssets {
   OpenSansBold?: any;
 
   logo: ImageSourcePropType;
-  header: ImageSourcePropType;
-  background: ImageSourcePropType;
   background_opening: ImageSourcePropType;
   logo_in_circle: ImageSourcePropType;
-
-  card1: ImageSourcePropType;
-  card2: ImageSourcePropType;
-  card3: ImageSourcePropType;
-  card4: ImageSourcePropType;
-  card5: ImageSourcePropType;
-
-  photo1: ImageSourcePropType;
-  photo2: ImageSourcePropType;
-  photo3: ImageSourcePropType;
-  photo4: ImageSourcePropType;
-  photo5: ImageSourcePropType;
-  photo6: ImageSourcePropType;
-  carousel1: ImageSourcePropType;
-
-  avatar1: ImageSourcePropType;
-  avatar2: ImageSourcePropType;
-
-  x5: ImageSourcePropType;
-  gle: ImageSourcePropType;
-  tesla: ImageSourcePropType;
-
-  ios: ImageSourcePropType;
-  android: ImageSourcePropType;
 }
 
 export interface ThemeFonts {
@@ -321,6 +258,7 @@ export interface ThemeFonts {
 
 export interface ThemeLineHeights {
   text: number;
+  h0: number;
   h1: number;
   h2: number;
   h3: number;

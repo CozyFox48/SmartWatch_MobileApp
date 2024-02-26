@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useTheme, useTranslation } from '../hooks';
+import React, { useState, useEffect } from 'react';
+import { useTheme } from '../hooks';
 import Block from './Block';
 import Text from './Text';
 import Button from './Button';
@@ -8,10 +8,14 @@ import No_device from "./No_device";
 const Article = ({ routes, scenes }) => {
   const [tab, setTab] = useState<string>(routes[0]?.id);
   const { colors, sizes } = useTheme();
-  const { t } = useTranslation();
+  useEffect(() => {
+    if (routes.length > 0 && !tab) {
+      setTab(routes[0]?.id);
+    }
+  }, [routes]);
+
   return (
     <Block>
-      {/* toggle products list */}
       <Block
         row
         flex={0}
@@ -55,8 +59,6 @@ const Article = ({ routes, scenes }) => {
           )}
         </Block>
       </Block>
-
-      {/* products list */}
       {routes.length !== 0 ? (
         scenes[tab]
       ) : (

@@ -1,18 +1,18 @@
-import React, {useState} from 'react';
-import {useTheme, useTranslation} from '../hooks';
-import {Block, LinkBox, Text, Tab_View, Button} from '../components';
+import React, { useState } from 'react';
+import { useTheme, useTranslation, useNotify } from '../hooks';
+import { Block, LinkBox, Text, Tab_View, Button } from '../components';
 import FIcon from 'react-native-vector-icons/FontAwesome5';
 import AIcon from 'react-native-vector-icons/FontAwesome';
 import Oxygen from './../assets/icons/oxygen.js';
-import {Dimensions} from 'react-native';
-import {LineChart} from 'react-native-chart-kit';
-
+import { Dimensions } from 'react-native';
+import { LineChart } from 'react-native-chart-kit';
+import {Calendar, LocaleConfig} from 'react-native-calendars';
 const screenWidth = Dimensions.get('window').width;
-const SceneEach = ({item}) => {
-  const {colors, fonts, sizes} = useTheme();
-  const {t} = useTranslation();
+const SceneEach = ({ item }) => {
+  const { colors, fonts, sizes } = useTheme();
+  const { t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(null);
-
+  const [selected, setSelected] = useState('');
   const categoryData = [
     {
       id: 'temperature',
@@ -53,7 +53,7 @@ const SceneEach = ({item}) => {
     ],
     datasets: [
       {
-        data: [20, 50, 30, 40, 30, 10, 60, 40, 30, 40, 10, 40],
+        data: [36.5, 36.6, 36.6, 36.6, 36.5, 36.6, 36.5, 36.5, 36.6, 36.6, 36.6, 36.6],
         color: () => colors.primary,
         strokeWidth: 2,
       },
@@ -76,6 +76,14 @@ const SceneEach = ({item}) => {
     <Block white>
       <Block marginTop={sizes.s}>
         <Block flex={0}>
+          <Calendar
+            onDayPress={day => {
+              setSelected(day.dateString);
+            }}
+            markedDates={{
+              [selected]: { selected: true, disableTouchEvent: true, selectedDotColor: 'orange' }
+            }}
+          />
           <Block row flex={0} scrollHorizontal>
             {categoryData.map((each, index) => (
               <Block
@@ -148,10 +156,10 @@ const SceneEach = ({item}) => {
               ? colors.primary
               : colors.white;
           }}
-          renderDotContent={({x, y, index, indexData}) => {
+          renderDotContent={({ x, y, index, indexData }) => {
             return index === activeIndex ? (
               <Block
-                style={{position: 'absolute', top: y - 30, left: x - 30}}
+                style={{ position: 'absolute', top: y - 30, left: x - 30 }}
                 white
                 card
                 padding={sizes.xs}
@@ -171,7 +179,7 @@ const SceneEach = ({item}) => {
 };
 
 const Home = () => {
-  const {sizes} = useTheme();
+  const { sizes } = useTheme();
 
   const data = [
     {
@@ -194,7 +202,7 @@ const Home = () => {
     },
   ];
   const routes = data.map((each) => {
-    return {id: each.name, title: each.name};
+    return { id: each.name, title: each.name };
   });
   const scenes = {};
   data.forEach((item) => {

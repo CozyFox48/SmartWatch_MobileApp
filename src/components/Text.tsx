@@ -30,6 +30,7 @@ const Typography = (props: ITextProps) => {
     bold,
     semibold,
     weight,
+    h0,
     h1,
     h2,
     h3,
@@ -99,6 +100,12 @@ const Typography = (props: ITextProps) => {
       fontWeight: weights.text,
       fontFamily: fonts.text,
       ...(textColor && {color: textColor}),
+      ...(h0 && {
+        fontSize: sizes.h0,
+        lineHeight: lines.h0,
+        fontWeight: weights.h0,
+        fontFamily: fonts.h1,
+      }),
       ...(h1 && {
         fontSize: sizes.h1,
         lineHeight: lines.h1,

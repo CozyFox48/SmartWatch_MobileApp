@@ -70,7 +70,7 @@
   "alert": {
     "temperature": "Temperature",
     "oxygen": "Oxygen",
-    "heart_rate": "Heart Rate",
+    "heart": "Heart Rate",
     "low": "Low",
     "high": "High",
     "unit_temp": "°c",
@@ -95,6 +95,7 @@
     "hours": "hours",
     "language": "Language",
     "color": "Color",
+    "save_success":"Saved successfully.",
     "english": "English",
     "spanish": "Español",
     "french": "Français"

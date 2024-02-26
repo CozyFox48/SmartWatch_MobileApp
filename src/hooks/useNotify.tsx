@@ -52,5 +52,18 @@ export default () => {
     ),
   });
 
+  // const notify_alert = (message: any) => showMessage({
+  //   message: '',
+  //   duration: 2000,
+  //   backgroundColor: 'transparent',
+  //   position: 'top',
+  //   titleStyle: { fontSize: 0, height: 0 },
+  //   renderCustomContent: () => (
+  //     <Block card row align='center' radius={sizes.xl} paddingHorizontal={sizes.sm}>
+  //       <Alert_each data={message} />
+  //     </Block>
+  //   ),
+  // });
+
   return { notify_fail, notify_success };
 }

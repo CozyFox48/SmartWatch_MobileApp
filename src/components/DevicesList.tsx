@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTheme, useData, useDatabase } from '../hooks/';
 import Block from './Block';
 import Button from './Button';
@@ -8,18 +8,19 @@ import { find_devices } from '../utility/get_random';
 import IIcon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/core';
 
-const Card = ({ name, connection, uuid, signal, index, isNew }) => {
+const Card = ({ name, connection, uuid, signal, index, isNew, deviceID }) => {
   const { assets, sizes } = useTheme();
-  const { handleDevices, devices, handleNewDevices, newDevices, setDetailDevice } = useData();
+  const { handleNewDevices, newDevices, setDetailDevice, handleDevices } = useData();
   const navigation = useNavigation();
-  const submit = () => {
-    handleDevices([...devices, { name: name, uuid: uuid, connection: true, strength: signal }]);
+  const submit = async () => {
     let result = [];
     for (const each of newDevices) {
       if (each.uuid !== uuid) result.push(each)
     }
-    handleNewDevices(result);
-    useDatabase.db_add_device({ name: name, uuid: uuid, connection: true, strength: signal })
+    handleNewDevices(result);    
+    await useDatabase.db_add_device({ name: name, uuid: uuid, connection: true, strength: signal });
+    const devicesList=await useDatabase.get_devices();
+    handleDevices(devicesList);
   }
   const navigate2detailDevice = () => {
     setDetailDevice(index);
@@ -120,6 +121,7 @@ const Components = () => {
           key={each.uuid}
           index={index}
           isNew={false}
+          deviceID={each.deviceID}
         />
       ))}
       {newDevices.map((each) => (

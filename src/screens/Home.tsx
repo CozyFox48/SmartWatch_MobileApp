@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { useTheme, useTranslation, useDatabase } from '../hooks';
+import { useTheme, useTranslation, useDatabase, useData } from '../hooks';
 import { Block, LinkBox, Text, Tab_View } from '../components';
 import FIcon from 'react-native-vector-icons/Feather';
 import FoIcon from 'react-native-vector-icons/FontAwesome5';
@@ -9,9 +9,15 @@ import Oxygen from './../assets/icons/oxygen.js';
 import Beat1 from '../assets/icons/beat1.js';
 import Beat2 from '../assets/icons/beat2.js';
 
-const SceneEach = ({ item }) => {
-  const { colors, fonts, sizes } = useTheme();
+const SceneEach = ({ item, index }) => {
+  const { colors, fonts, sizes, } = useTheme();
+  const { values } = useData()
   const { t } = useTranslation();
+  const [value, setValue]=useState({});
+
+  useEffect(()=>{
+    setValue(values[item.deviceID]);
+  },[values]);
 
   return (
     <Block white>
@@ -29,12 +35,12 @@ const SceneEach = ({ item }) => {
               <AIcon name={'heartbeat'} color={colors.warning} size={30} />
             </Block>
             <Text color={colors.warning} h5>
-              {t('alert.heart_rate')}
+              {t('alert.heart')}
             </Text>
           </Block>
           <Block flex={0} row align="flex-end">
-            <Text font={fonts.normal} h2 color={colors.warning}>
-              56
+            <Text font={fonts.normal} h0 color={colors.warning}>
+              {value?.heart?.current||0}
             </Text>
             <Text
               font={fonts.normal}
@@ -56,7 +62,8 @@ const SceneEach = ({ item }) => {
           color={colors.danger_light}
           radius={sizes.m}
           padding={sizes.sm}
-          marginRight={sizes.s}>
+          marginRight={sizes.s}
+          justify='space-around'>
           <Block
             color={colors.danger_middle}
             justify="center"
@@ -64,22 +71,26 @@ const SceneEach = ({ item }) => {
             radius={sizes.xxl}
             width={sizes.xl}
             height={sizes.xl}
-            flex={0}>
+            flex={0}
+          >
             <FoIcon name={'temperature-high'} color={colors.danger} size={30} />
           </Block>
           <Text color={colors.primary} p>
             {t('alert.temperature')}
           </Text>
-          <Text font={fonts.normal} h2 color={colors.primary}>
-            56
+
+          <Text h0 font={fonts.normal} color={colors.primary} align='center' >
+            {value?.temperature?.current||0}
             {t('alert.unit_temp')}
           </Text>
+
         </Block>
         <Block
           color={colors.info_light}
           radius={sizes.m}
           padding={sizes.sm}
-          marginLeft={sizes.s}>
+          marginLeft={sizes.s}
+          justify='space-around'>
           <Block
             color={colors.info_middle}
             justify="center"
@@ -93,13 +104,13 @@ const SceneEach = ({ item }) => {
           <Text color={colors.info} p>
             {t('alert.oxygen')}
           </Text>
-          <Text font={fonts.normal} h2 color={colors.info}>
-            56
+          <Text h0 font={fonts.normal} align='center' color={colors.info}>
+            {value?.oxygen?.current||0}
             {t('alert.unit_oxygen')}
           </Text>
         </Block>
       </Block>
-      <Block
+      {/* <Block
         flex={0}
         radius={sizes.xxl}
         gray
@@ -132,7 +143,7 @@ const SceneEach = ({ item }) => {
             {t('home.call')}
           </Text>
         </Block>
-      </Block>
+      </Block> */}
     </Block>
   );
 };
@@ -141,23 +152,19 @@ const Home = () => {
   const { sizes } = useTheme();
   const [routes, setRoutes] = useState([]);
   const [scenes, setScenes] = useState({});
-  
+  const { devices } = useData();
+
   useEffect(() => {
-    const getData = async () => {
-      const devices = await useDatabase.get_devices();
-      const tempRoutes = devices.map((each) => {
-        return { id: each.uuid, title: each.name };
-      })
-      setRoutes(tempRoutes);
-      const tempScenes = {};
-      devices.forEach((item) => {
-        const nameKey = item.uuid;
-        tempScenes[nameKey] = <SceneEach item={item} />;
-      });
-      setScenes(tempScenes);
-    }
-    getData();
-  }, [])
+    let tempRoutes = devices.map((each) => {
+      return { id: each.deviceID, title: each.name }
+    });
+    setRoutes(tempRoutes);
+    const tempScenes = {};
+    devices.map((each) => {
+      tempScenes[each.deviceID] = <SceneEach item={each} index={each.deviceID} />;
+    });
+    setScenes(tempScenes);
+  }, [devices])
 
   return (
     <Block white>
