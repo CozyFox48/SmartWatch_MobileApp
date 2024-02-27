@@ -4,12 +4,10 @@ import Block from '../components/Block'
 import { showMessage } from 'react-native-flash-message';
 import useTheme from '../hooks/useTheme';
 import {
-  TranslationContext,
-  TranslationProvider,
   useTranslation,
 } from '../hooks/useTranslation';
 import FIcon from 'react-native-vector-icons/FontAwesome5';
-import { Alert_each } from '../components';
+import Alert_each from '../components/Alert_each';
 
 export default () => {
   const { colors, sizes } = useTheme();
@@ -58,9 +56,7 @@ export default () => {
     position: 'top',
     titleStyle: { fontSize: 0, height: 0 },
     renderCustomContent: () => (
-    
         <Alert_each data={message} />
- 
     ),
   });
 

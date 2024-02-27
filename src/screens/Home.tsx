@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-
-import { useTheme, useTranslation, useDatabase, useData } from '../hooks';
+import { temperature_converter } from '../utility/temperature_convert';
+import { useTheme, useTranslation, useData } from '../hooks';
 import { Block, LinkBox, Text, Tab_View } from '../components';
-import FIcon from 'react-native-vector-icons/Feather';
 import FoIcon from 'react-native-vector-icons/FontAwesome5';
 import AIcon from 'react-native-vector-icons/FontAwesome';
 import Oxygen from './../assets/icons/oxygen.js';
@@ -11,7 +10,7 @@ import Beat2 from '../assets/icons/beat2.js';
 
 const SceneEach = ({ item, index }) => {
   const { colors, fonts, sizes, } = useTheme();
-  const { values } = useData()
+  const { values, userData } = useData()
   const { t } = useTranslation();
 
   return (
@@ -75,8 +74,8 @@ const SceneEach = ({ item, index }) => {
           </Text>
 
           <Text h0 font={fonts.normal} color={colors.primary} align='center' >
-            {values[item.deviceID]?.temperature?.current||0}
-            {t('alert.unit_temperature')}
+            {userData.temperature==="celcius"?values[item.deviceID]?.temperature?.current||0:temperature_converter(values[item.deviceID]?.temperature?.current)||0}
+            {userData.temperature==="celcius"?t('alert.unit_temperature'):t('alert.unit_temperature_f')}
           </Text>
 
         </Block>

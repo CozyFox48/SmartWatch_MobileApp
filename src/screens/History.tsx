@@ -7,6 +7,7 @@ import { Block, LinkBox, Text, Tab_View, Button } from '../components';
 // import { Dimensions } from 'react-native';
 // import { LineChart } from 'react-native-chart-kit';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
+import { temperature_converter } from '../utility/temperature_convert';
 
 const SceneEach = ({ item }) => {
   const { colors, fonts, sizes } = useTheme();
@@ -15,6 +16,7 @@ const SceneEach = ({ item }) => {
   const [selected, setSelected] = useState('');
   const [dotted, setDotted] = useState({});
   const [value, setValue] = useState({});
+  const { userData } = useData();
 
   const oxygen_dot = { key: 'oxygen_dot', color: colors.info };
   const temperature_dot = { key: 'temperature_dot', color: colors.danger };
@@ -74,15 +76,27 @@ const SceneEach = ({ item }) => {
               <Text color={colors[eachType]} h5>{t('alert.' + eachType)}</Text>
               <Block paddingLeft={sizes.md} row paddingRight={sizes.sm} paddingVertical={sizes.xs}>
                 <Block flex={1}><Text p>{t('history.average')}</Text></Block>
-                <Block flex={0}><Text p color={colors[eachType]}>{value[selected]?.[eachType]?.average} {t('alert.unit_' + eachType)}</Text></Block>
+                <Block flex={0}>
+                  <Text p color={colors[eachType]}>
+                    {(eachType === 'temperature') && (userData.temperature !== "celcius")?temperature_converter(value[selected]?.[eachType]?.average):value[selected]?.[eachType]?.average} {t('alert.unit_' + eachType + ((eachType === 'temperature') && (userData.temperature !== "celcius") ? '_f' : ""))}
+                  </Text>
+                </Block>
               </Block>
               <Block paddingLeft={sizes.md} row paddingRight={sizes.sm} paddingVertical={sizes.xs}>
                 <Block flex={1}><Text p>{t('history.max')}</Text></Block>
-                <Block flex={0}><Text p color={colors[eachType]}>{value[selected]?.[eachType]?.max} {t('alert.unit_' + eachType)}</Text></Block>
+                <Block flex={0}>
+                  <Text p color={colors[eachType]}>
+                    {(eachType === 'temperature') && (userData.temperature !== "celcius")?temperature_converter(value[selected]?.[eachType]?.max):value[selected]?.[eachType]?.max} {t('alert.unit_' + eachType + ((eachType === 'temperature') && (userData.temperature !== "celcius") ? '_f' : ""))}
+                  </Text>
+                </Block>
               </Block>
               <Block paddingLeft={sizes.md} row paddingRight={sizes.sm} paddingVertical={sizes.xs}>
                 <Block flex={1}><Text p>{t('history.min')}</Text></Block>
-                <Block flex={0}><Text p color={colors[eachType]}>{value[selected]?.[eachType]?.min} {t('alert.unit_' + eachType)}</Text></Block>
+                <Block flex={0}>
+                  <Text p color={colors[eachType]}>
+                    {(eachType === 'temperature') && (userData.temperature !== "celcius")?temperature_converter(value[selected]?.[eachType]?.min):value[selected]?.[eachType]?.min} {t('alert.unit_' + eachType + ((eachType === 'temperature') && (userData.temperature !== "celcius") ? '_f' : ""))}
+                  </Text>
+                </Block>
               </Block>
               <Block paddingLeft={sizes.md} row paddingRight={sizes.sm} paddingVertical={sizes.xs}>
                 <Block flex={1}><Text p>{t('history.count')}</Text></Block>

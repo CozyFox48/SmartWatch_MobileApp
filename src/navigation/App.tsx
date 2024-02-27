@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useFonts } from 'expo-font';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import * as SplashScreen from 'expo-splash-screen';
@@ -11,7 +11,7 @@ import FlashMessage from 'react-native-flash-message';
 SplashScreen.preventAutoHideAsync();
 
 export default () => {
-  const { isDark, theme, setTheme, devices, setValues, setAlerts, alerts } = useData();
+  const { isDark, theme, setTheme, devices, setValues} = useData();
   const currentMinute = useRef(getCurrentFormattedDateTime());
   const { notify_alert } = useNotify();
   const checkAbnormal = (value: number, type: string, deviceID: string) => {

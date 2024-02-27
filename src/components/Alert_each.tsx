@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import { temperature_converter } from '../utility/temperature_convert';
 import Block from './Block';
 import Text from './Text';
 import { useTheme, useTranslation, useData } from '../hooks';
@@ -11,7 +11,7 @@ import { formatDate } from './../utility/date_formatter';
 const Article = ({ data }) => {
   const { t } = useTranslation();
   const { colors, fonts, sizes } = useTheme();
-  const { devices } = useData();
+  const { devices, userData } = useData();
   const [mapping, setMapping] = useState({})
 
   useEffect(() => {
@@ -101,10 +101,10 @@ const Article = ({ data }) => {
       </Block>
       <Block justify="flex-end" align="center" flex={1} row>
         <Text h4 font={fonts.semibold} color={color}>
-          {data.value}
+          {(data.type==='temperature')&&(userData.temperature!=="celcius")?temperature_converter(data.value):data.value}
         </Text>
         <Text h5 font={fonts.normal} color={color}>
-          {t('alert.unit_' + data.type)}
+          {t('alert.unit_' + data.type+((data.type==='temperature')&&(userData.temperature!=="celcius")?'_f':""))}
         </Text>
       </Block>
     </Block>

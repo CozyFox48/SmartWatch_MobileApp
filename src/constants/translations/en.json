@@ -73,7 +73,8 @@
     "heart": "Heart Rate",
     "low": "Low",
     "high": "High",
-    "unit_temperature": "°c",
+    "unit_temperature": "°C",
+    "unit_temperature_f":"°F",
     "unit_oxygen": "%",
     "unit_heart": "bpm"
   },
