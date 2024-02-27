@@ -12,12 +12,12 @@ const Article = ({ data }) => {
   const { t } = useTranslation();
   const { colors, fonts, sizes } = useTheme();
   const { devices } = useData();
-  const [mapping, setMapping]= useState({})
-  
+  const [mapping, setMapping] = useState({})
+
   useEffect(() => {
-    let result={};
-    devices.forEach((each, key)=>{
-      result[each.deviceID]=each.name
+    let result = {};
+    devices.forEach((each, key) => {
+      result[each.deviceID] = each.name
     });
     setMapping(result);
   }, [devices])
@@ -104,13 +104,7 @@ const Article = ({ data }) => {
           {data.value}
         </Text>
         <Text h5 font={fonts.normal} color={color}>
-          {data.type === 'heart'
-            ? 'bpm'
-            : data.type === 'temperature'
-              ? '°C'
-              : data.type === 'oxygen'
-                ? '%'
-                : ''}
+          {t('alert.unit_' + data.type)}
         </Text>
       </Block>
     </Block>

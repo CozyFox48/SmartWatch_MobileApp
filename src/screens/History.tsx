@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme, useTranslation, useData, useDatabase } from '../hooks';
 import { Block, LinkBox, Text, Tab_View, Button } from '../components';
-import FIcon from 'react-native-vector-icons/FontAwesome5';
-import AIcon from 'react-native-vector-icons/FontAwesome';
-import Oxygen from './../assets/icons/oxygen.js';
-import { Dimensions } from 'react-native';
-import { LineChart } from 'react-native-chart-kit';
+// import FIcon from 'react-native-vector-icons/FontAwesome5';
+// import AIcon from 'react-native-vector-icons/FontAwesome';
+// import Oxygen from './../assets/icons/oxygen.js';
+// import { Dimensions } from 'react-native';
+// import { LineChart } from 'react-native-chart-kit';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 
 const SceneEach = ({ item }) => {
@@ -16,10 +16,20 @@ const SceneEach = ({ item }) => {
   const [dotted, setDotted] = useState({});
   const [value, setValue] = useState({});
 
-  const oxygen_dot = { key: 'oxygen_dot', color: 'red' };
-  const temperature_dot = { key: 'temperature_dot', color: 'blue' };
-  const heart_dot = { key: 'heart_dot', color: 'green' };
-
+  const oxygen_dot = { key: 'oxygen_dot', color: colors.info };
+  const temperature_dot = { key: 'temperature_dot', color: colors.danger };
+  const heart_dot = { key: 'heart_dot', color: colors.warning };
+  const display_time = (time) => {
+    let result = "";
+    if (time && time > 0) {
+      const hour = ~~(time / 360);
+      if (hour >= 1) result = ~~(hour) + " Hours ";
+      const minute = ~~(time / 6) - hour * 60;
+      if (minute >= 1) result = result + minute + " Min";
+      if (time < 6) result = result + time + '0 sec'
+    }
+    return result;
+  }
   const get_data = async (year, month) => {
     setLoading(true);
     const result = await useDatabase.get_month_date(year, month, item.deviceID);
@@ -41,7 +51,7 @@ const SceneEach = ({ item }) => {
 
   return (
     <Block white>
-      <Block marginTop={sizes.s}>
+      <Block marginTop={sizes.s} scroll>
         <Block flex={0}>
           <Calendar
             markingType={'multi-dot'}
@@ -58,6 +68,36 @@ const SceneEach = ({ item }) => {
             }}
           />
         </Block>
+        {selected === '' ? <></> :
+          ['temperature', 'oxygen', 'heart'].map(eachType =>
+            <Block card color={colors[eachType + '_light']} margin={sizes.sm} key={eachType}>
+              <Text color={colors[eachType]} h5>{t('alert.' + eachType)}</Text>
+              <Block paddingLeft={sizes.md} row paddingRight={sizes.sm} paddingVertical={sizes.xs}>
+                <Block flex={1}><Text p>{t('history.average')}</Text></Block>
+                <Block flex={0}><Text p color={colors[eachType]}>{value[selected]?.[eachType]?.average} {t('alert.unit_' + eachType)}</Text></Block>
+              </Block>
+              <Block paddingLeft={sizes.md} row paddingRight={sizes.sm} paddingVertical={sizes.xs}>
+                <Block flex={1}><Text p>{t('history.max')}</Text></Block>
+                <Block flex={0}><Text p color={colors[eachType]}>{value[selected]?.[eachType]?.max} {t('alert.unit_' + eachType)}</Text></Block>
+              </Block>
+              <Block paddingLeft={sizes.md} row paddingRight={sizes.sm} paddingVertical={sizes.xs}>
+                <Block flex={1}><Text p>{t('history.min')}</Text></Block>
+                <Block flex={0}><Text p color={colors[eachType]}>{value[selected]?.[eachType]?.min} {t('alert.unit_' + eachType)}</Text></Block>
+              </Block>
+              <Block paddingLeft={sizes.md} row paddingRight={sizes.sm} paddingVertical={sizes.xs}>
+                <Block flex={1}><Text p>{t('history.count')}</Text></Block>
+                <Block flex={0}><Text p color={colors[eachType]}>{display_time(value[selected]?.[eachType]?.count)}</Text></Block>
+              </Block>
+              <Block paddingLeft={sizes.md} row paddingRight={sizes.sm} paddingVertical={sizes.xs}>
+                <Block flex={1}><Text p>{t('history.high_alert')}</Text></Block>
+                <Block flex={0}><Text p color={colors[eachType]}>{display_time(value[selected]?.[eachType]?.highAlertCount)}</Text></Block>
+              </Block>
+              <Block paddingLeft={sizes.md} row paddingRight={sizes.sm} paddingVertical={sizes.xs}>
+                <Block flex={1}><Text p>{t('history.low_alert')}</Text></Block>
+                <Block flex={0}><Text p color={colors[eachType]}>{display_time(value[selected]?.[eachType]?.lowAlertCount)}</Text></Block>
+              </Block>
+            </Block>
+          )}
       </Block>
     </Block>
   );

@@ -1,12 +1,13 @@
-import React from 'react';
-
-import { useTheme, useTranslation, useData } from '../hooks';
+import React, { useState } from 'react';
+import { useTheme, useTranslation, useData, useDatabase, useNotify } from '../hooks';
 import { Block, Button, Input, Text } from '../components';
 
 const Home = () => {
   const { t } = useTranslation();
   const { colors, sizes } = useTheme();
-  const { handleDevices, devices, detailDevice } = useData();
+  const { devices, detailDevice, handleDevices } = useData();
+  const [display, setDisplay] = useState(devices[detailDevice]);
+  const { notify_success } = useNotify();
 
   return (
     <Block white>
@@ -15,13 +16,32 @@ const Home = () => {
           <Input
             label={t('device.device_name')}
             placeholder={t('common.search')}
-            value={devices[detailDevice].name}
-            onChangeText={(text) => {
-              // let temp=devices
-              // devices[detailDevice].name=text;
+            value={display.name}
+            onChangeText={async (text) => {
+              await setDisplay({ ...display, name: text });
+              const devicesList = await useDatabase.get_devices();
+              handleDevices(devicesList);
+              notify_success(t("setting.save_success"));
             }}
           />
         </Block>
+        {display.name === devices[detailDevice].name ? <></> :
+          <Block flex={0} paddingHorizontal={sizes.padding}>
+            <Button
+              row
+              primary
+              paddingVertical={sizes.sm}
+              paddingHorizontal={sizes.m}
+              onPress={() => {
+                useDatabase.update_device_name(display);
+
+              }}>
+              <Text white bold h5 marginRight={sizes.xs}>
+                {t('setting.save')}
+              </Text>
+            </Button>
+          </Block>}
+
         <Block
           flex={0}
           paddingTop={sizes.sm}
@@ -74,8 +94,6 @@ const Home = () => {
           </Button>
         </Block>
       </Block>
-
-      {/* toggle products list */}
     </Block>
   );
 };

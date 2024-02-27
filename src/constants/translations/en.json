@@ -73,9 +73,17 @@
     "heart": "Heart Rate",
     "low": "Low",
     "high": "High",
-    "unit_temp": "°c",
+    "unit_temperature": "°c",
     "unit_oxygen": "%",
     "unit_heart": "bpm"
+  },
+  "history":{
+    "average":"Average",
+    "max":"Maxium",
+    "min":"minimum",
+    "count":"Measurement time",
+    "high_alert":"High Alert Time",
+    "low_alert":"Low Alert Time"
   },
   "setting": {
     "account": "Account",
@@ -96,6 +104,7 @@
     "language": "Language",
     "color": "Color",
     "save_success":"Saved successfully.",
+    "save_fail":"Failed to save data",
     "english": "English",
     "spanish": "Español",
     "french": "Français"

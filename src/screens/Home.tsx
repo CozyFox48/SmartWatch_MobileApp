@@ -76,7 +76,7 @@ const SceneEach = ({ item, index }) => {
 
           <Text h0 font={fonts.normal} color={colors.primary} align='center' >
             {values[item.deviceID]?.temperature?.current||0}
-            {t('alert.unit_temp')}
+            {t('alert.unit_temperature')}
           </Text>
 
         </Block>

@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import {useTheme, useTranslation, useData} from '../hooks';
+import { useTheme, useTranslation, useData } from '../hooks';
 import Block from './Block';
 import Text from './Text';
 import Button from './Button';
 import IIcon from 'react-native-vector-icons/Ionicons';
-import {find_devices} from '../utility/get_random';
+import { find_devices } from '../utility/get_random';
 import { useNavigation } from '@react-navigation/core';
 
 const Article = () => {
     const { colors, sizes } = useTheme();
     const { t } = useTranslation();
-    const { handleNewDevices, handleSettingTab} = useData();
+    const { handleNewDevices, handleSettingTab } = useData();
     const navigation = useNavigation();
     const submit = () => {
         const data = find_devices();

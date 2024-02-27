@@ -20,18 +20,19 @@ export default () => {
   const menu = {
     headerStyle: { elevation: 0 },
     headerTitleAlign: 'left',
-    headerTitleContainerStyle: { marginLeft: -sizes.sm },
+    // headerTitleContainerStyle: { marginLeft: -sizes.sm },
     headerLeftContainerStyle: { paddingLeft: sizes.s },
     headerRightContainerStyle: { paddingRight: sizes.s },
     cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
     headerTitle: ({ children }: StackHeaderTitleProps) => (
       <Text h4>{children}</Text>
     ),
-    headerLeft: () => (
-      <Button onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
-        <Image source={icons.menu} radius={0} color={colors.icon} />
-      </Button>
-    ),
+    headerLeft: () => null,
+    // headerLeft: () => (
+    //   <Button onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
+    //     <Image source={icons.menu} radius={0} color={colors.icon} />
+    //   </Button>
+    // ),
     headerRight: () => null,
   } as StackHeaderOptions;
 

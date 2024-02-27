@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTheme, useTranslation, useData, useDatabase, useNotify } from '../hooks';
 import Block from './Block';
 import Button from './Button';
-import Image from './Image';
 import Text from './Text';
 import Input from './Input';
 
 const SetName = () => {
-    const { sizes, colors, fonts } = useTheme();
+    const { sizes } = useTheme();
     const { t } = useTranslation();
     const { userData, handleUserData } = useData();
     const { notify_fail, notify_success } = useNotify();
@@ -17,7 +16,6 @@ const SetName = () => {
                 <Input
                     label={t('common.name')}
                     placeholder={t('common.search')}
-
                     value={userData.name}
                     onChangeText={(text) => handleUserData({ ...userData, name: text })}
                 />
@@ -25,8 +23,12 @@ const SetName = () => {
             <Block padding={sizes.s} row center marginBottom={sizes.s}>
                 <Button primary paddingHorizontal={sizes.m} flex={0}
                     onPress={async () => {
-                        await useDatabase.update_user_data(userData);
-                        notify_success(t('setting.save_success'));
+                        try{
+                            await useDatabase.update_user_data(userData);
+                            notify_success(t('setting.save_success'));
+                        }catch(e){
+                            notify_fail(t('setting.save_fail'));
+                        }
                     }}>
                     <Text white bold h5>
                         {t('setting.save') + ' ' + t('setting.change')}

@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTheme, useTranslation, useData, useDatabase, useNotify } from '../hooks';
 import Block from './Block';
 import Button from './Button';
-import Image from './Image';
 import Text from './Text';
-import Input from './Input';
 
 const LanguageComponent = () => {
   const { userData, handleUserData } = useData();
@@ -32,7 +30,7 @@ const LanguageComponent = () => {
           <Block padding={sizes.s} key={key}>
             <Button shadow onPress={async() => {
               handleUserData({ ...useData, language: each.id });
-              await useDatabase.update_user_data({ ...useData, language: each.id });
+              await useDatabase.update_user_data({ ...userData, language: each.id });
             }}>
               <Text
                 font={each.id === userData.language ? fonts.bold : ''}

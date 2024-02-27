@@ -76,6 +76,15 @@ export interface IThemeProvider {
 }
 
 export interface ThemeColors {
+  temperature: ColorValue;
+  temperature_light: ColorValue;
+  temperature_middle: ColorValue;
+  oxygen: ColorValue;
+  oxygen_light: ColorValue;
+  oxygen_middle: ColorValue;
+  heart: ColorValue;
+  heart_light: ColorValue;
+  heart_middle: ColorValue;
   text: ColorValue;
   text_light: ColorValue;
   primary: ColorValue;

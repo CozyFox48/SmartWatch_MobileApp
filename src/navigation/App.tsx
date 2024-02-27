@@ -14,7 +14,7 @@ export default () => {
   const { isDark, theme, setTheme, devices, setValues, setAlerts, alerts } = useData();
   const currentMinute = useRef(getCurrentFormattedDateTime());
   const { notify_alert } = useNotify();
-  const checkAbnormal = async (value: number, type: string, deviceID: string) => {
+  const checkAbnormal = (value: number, type: string, deviceID: string) => {
     try {
       let result: any = {}
       if ((type == "oxygen" && value < 94) || (type == "temperature" && value < 36) || (type == "heart" && value < 60)) {
@@ -36,14 +36,12 @@ export default () => {
           hasRead: false
         }
         notify_alert(result);
-        // useDatabase.db_add_alert(result);
+        useDatabase.db_add_alert(result);
         // setAlerts((prev: any) => { return [result, ...prev]; });
-
         return { high: result.isHighValue ? 1 : 0, low: result.isHighValue ? 0 : 1 };
       }
       return { high: 0, low: 0 };
     } catch (e) {
-      console.log(e);
       return { high: 0, low: 0 };
     }
   }
@@ -103,7 +101,6 @@ export default () => {
             converter('heart', each.deviceID);
             converter('temperature', each.deviceID);
           });
-
           const dateNow1 = getCurrentFormattedDateTime();
           // console.log(dateNow1,currentMinute.current,dateNow1 !== currentMinute.current);
           if (dateNow1 !== currentMinute.current) {
@@ -134,7 +131,7 @@ export default () => {
   }
 
   useEffect(() => {
-    updateValues();
+    // updateValues();
     const intervalId = setInterval(updateValues, 10000);
     return () => clearInterval(intervalId);
   }, [devices]);

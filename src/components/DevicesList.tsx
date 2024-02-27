@@ -6,10 +6,11 @@ import Image from './Image';
 import Text from './Text';
 import { find_devices } from '../utility/get_random';
 import IIcon from 'react-native-vector-icons/Ionicons';
+import AIcon from 'react-native-vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/core';
 
 const Card = ({ name, connection, uuid, signal, index, isNew, deviceID }) => {
-  const { assets, sizes } = useTheme();
+  const { assets, sizes, colors } = useTheme();
   const { handleNewDevices, newDevices, setDetailDevice, handleDevices } = useData();
   const navigation = useNavigation();
   const submit = async () => {
@@ -96,7 +97,7 @@ const Card = ({ name, connection, uuid, signal, index, isNew, deviceID }) => {
           width={sizes.xl}
           onPress={navigate2detailDevice}
           flex={0}>
-          <Image source={assets?.direction_right} />
+          <AIcon name={'arrowright'} color={colors.primary} size={25} />
         </Button>
       )}
     </Block>

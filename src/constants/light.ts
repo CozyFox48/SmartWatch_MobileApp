@@ -9,6 +9,15 @@ import {
 import {THEME as commonTheme} from './theme';
 
 export const COLORS: ThemeColors = {
+  temperature: '#FD3263',
+  temperature_middle: '#FFE0E8',
+  temperature_light: '#FFEFF3',
+  heart: '#FF9900',
+  heart_middle: '#FFF3E0',
+  heart_light: '#FFF9EF',
+  oxygen: '#309CFF',
+  oxygen_middle: '#E0F0FF',
+  oxygen_light: '#EFF7FF',
   // default text color
   text: '#242E49',
   text_light: '#5D6A85',
