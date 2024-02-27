@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useState, useEffect } from 'react';
 import { INewDevice, IUseData, ITheme, IDevice, IAlert } from '../constants/types';
 import Storage from '@react-native-async-storage/async-storage';
-import { light } from '../constants';
+import { light, blue, yellow } from '../constants';
 
 export const DataContext = React.createContext({});
 
@@ -93,8 +93,19 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    setTheme(isDark ? light : light);
-  }, [isDark]);
+    if (userData.color==="red"){
+      setTheme(light);
+    }else if (userData.color==="blue"){
+      setTheme(blue);
+    } else if (userData.color==="yellow"){
+      setTheme(yellow);
+    } else{
+      setTheme(light);
+    }
+  }, [userData]);
+  // useEffect(() => {
+  //   setTheme(isDark ? light : light);
+  // }, [isDark]);
 
   return (
     <DataContext.Provider value={contextValue}>{children}</DataContext.Provider>

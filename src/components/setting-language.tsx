@@ -29,7 +29,7 @@ const LanguageComponent = () => {
         return (
           <Block padding={sizes.s} key={key}>
             <Button shadow onPress={async() => {
-              handleUserData({ ...useData, language: each.id });
+              handleUserData({ ...userData, language: each.id });
               await useDatabase.update_user_data({ ...userData, language: each.id });
             }}>
               <Text

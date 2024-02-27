@@ -69,11 +69,11 @@ const SceneEach = ({ item, index }) => {
           >
             <FoIcon name={'temperature-high'} color={colors.danger} size={30} />
           </Block>
-          <Text color={colors.primary} p>
+          <Text color={colors.danger} p>
             {t('alert.temperature')}
           </Text>
 
-          <Text h0 font={fonts.normal} color={colors.primary} align='center' >
+          <Text h1 font={fonts.normal} color={colors.danger} align='center' >
             {userData.temperature==="celcius"?values[item.deviceID]?.temperature?.current||0:temperature_converter(values[item.deviceID]?.temperature?.current)||0}
             {userData.temperature==="celcius"?t('alert.unit_temperature'):t('alert.unit_temperature_f')}
           </Text>

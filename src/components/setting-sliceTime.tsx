@@ -16,7 +16,7 @@ const AlarmComponent = () => {
           <Button
             key={key}
             padding={sizes.s}
-            color={each === userData.sliceTime ? colors.danger_light : ''}
+            color={each === userData.sliceTime ? colors.secondary : ''}
             onPress={async () => {
                 await useDatabase.update_user_data({ ...userData, sliceTime: each });
                 const tempUserData = await useDatabase.get_user_data();

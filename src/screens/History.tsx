@@ -66,7 +66,11 @@ const SceneEach = ({ item }) => {
             }}
             markedDates={{
               ...dotted,
-              [selected]: { selected: true, disableTouchEvent: true, marked: true, selectedColor: 'orange', ...dotted[selected] },
+              [selected]: { selected: true, disableTouchEvent: true, marked: true, selectedColor: colors.primary, ...dotted[selected] },
+            }}
+            theme={{
+              todayTextColor: colors.primary,
+              arrowColor:colors.primary
             }}
           />
         </Block>

@@ -24,7 +24,7 @@ const TemperatureComponent = () => {
                 const tempUserData = await useDatabase.get_user_data();
                 handleUserData(tempUserData);
             }}
-            color={each.id === userData.temperature ? colors.danger_light : ''}
+            color={each.id === userData.temperature ? colors.secondary : ''}
             row>
             <Text flex={1} >
               {each.name}
