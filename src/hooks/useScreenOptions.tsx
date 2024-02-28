@@ -4,18 +4,18 @@ import {
   CardStyleInterpolators,
 } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/core';
-import { DrawerActions } from '@react-navigation/native';
 import { StackHeaderOptions } from '@react-navigation/stack/lib/typescript/src/types';
 
-import Image from '../components/Image';
 import Text from '../components/Text';
 import useTheme from '../hooks/useTheme';
 import Button from '../components/Button';
 import IIcon from 'react-native-vector-icons/AntDesign';
+import FIcon from 'react-native-vector-icons/Entypo';
+import useDatabase from './useDatabase';
 
 export default () => {
   const navigation = useNavigation();
-  const { icons, colors, sizes, assets } = useTheme();
+  const { colors, sizes } = useTheme();
 
   const menu = {
     headerStyle: { elevation: 0 },
@@ -33,7 +33,16 @@ export default () => {
     //     <Image source={icons.menu} radius={0} color={colors.icon} />
     //   </Button>
     // ),
-    headerRight: () => null,
+    headerRight: () => (
+      <Button onPress={() => {
+        useDatabase.db_signOut();
+        navigation.navigate('Screens', {
+          screen: 'SignIn',
+        })
+      }}>
+        <FIcon name={'log-out'} color={colors.primary} size={30} />
+      </Button>
+    ),
   } as StackHeaderOptions;
 
   const options = {

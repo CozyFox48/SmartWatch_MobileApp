@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { IAlert, IDevice } from '../constants/types';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { getFirestore, doc, getDocs, setDoc, collection, query, limit, orderBy, getDoc, updateDoc, where } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -152,6 +152,16 @@ const db_signup = async (email: string, password: string) => {
   return result
 };
 
+const db_signOut = async () => {
+  await signOut()
+    .then(() => {
+      console.log('User signed out successfully');
+    })
+    .catch((error) => {
+      console.log('Error signing out:', error);
+    });
+};
+
 const db_signin = async (email: string, password: string) => {
   let result = false;
   try {
@@ -209,6 +219,7 @@ const get_month_date = async (year, month, deviceID) => {
   return result;
 }
 
+
 const update_device_name = async (newData) => {
   if (auth.currentUser) {
     const deviceRef = doc(db, 'users', auth.currentUser.uid, 'devices', newData.deviceID);
@@ -216,4 +227,4 @@ const update_device_name = async (newData) => {
   }
 }
 
-export default { update_device_name, db_signup, db_signin, db_add_device, get_devices, db_add_alert, get_alerts, get_user_data, update_user_data, set_data, get_month_date };
+export default { update_device_name, db_signup, db_signin, db_add_device, get_devices, db_add_alert, get_alerts, get_user_data, update_user_data, set_data, get_month_date, db_signOut };
